@@ -15,7 +15,13 @@ END_VAR
 ## Instantiate client
 
 ```
-fbRpc : tchaxx.FB_RPC(sAmsNetId:= tchaxx.GCL.cLocalAmsNetId, nAmsPort:= 852, sInstancePath:= 'MAIN.fbRpcServer', sSymbol:= 'Greet');
+fbRpc : tchaxx.FB_RPC(sAmsNetId:= tchaxx.GCL.cLocalAmsNetId, 
+                      nAmsPort:= 852, 
+                      sInstancePath:= 'MAIN.fbRpcServer', 
+                      sSymbol:= 'Greet');
+sArg  : T_MaxString := _AppInfo.AppName;
+sRetVal : T_MaxString;
+stRetVal : ST_AdsStatus;
 ```
 
 ## Invoke RPC method
