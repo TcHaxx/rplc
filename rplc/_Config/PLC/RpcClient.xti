@@ -14,7 +14,7 @@
 				<Defines/>
 			</Variant>
 		</ProjectVariant>
-		<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="..\examples\RpcClient\RpcClient.tmc" TmcHash="{CD336C35-C2E5-C7E6-13CE-6C5C1E15C1D8}">
+		<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="..\examples\RpcClient\RpcClient.tmc" TmcHash="{53FA3926-AAF4-F4BC-1825-48E0142907C0}">
 			<Name>RpcClient Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 			<Contexts>

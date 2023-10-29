@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" TcProjectVariant="LIB">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" TcProjectVariant="DEMO">
 	<Project ProjectGUID="{F28E373C-0939-463B-84B1-411776C73026}" TargetNetId="41.143.68.207.1.1" Target64Bit="true" ShowHideConfigurations="#x6">
 		<System>
 			<Tasks>
-				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+				<Task Id="3" Disabled="true" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
 					<ProjectVariant PvUseDisable="true" PvUseParameter="true">
 						<Variant>
@@ -24,22 +24,48 @@
 					<ProjectVariant PvUseDisable="true" PvUseParameter="true">
 						<Variant>
 							<Name>DEMO</Name>
-							<Name>UNIT_TEST</Name>
-							<Disable>0</Disable>
-							<Parameters Priority="1" CycleTime="100000"/>
-						</Variant>
-						<Variant>
 							<Name>LIB</Name>
 							<Disable>1</Disable>
 							<Parameters Priority="1" CycleTime="100000"/>
 						</Variant>
+						<Variant>
+							<Name>UNIT_TEST</Name>
+							<Disable>0</Disable>
+							<Parameters Priority="1" CycleTime="100000"/>
+						</Variant>
 					</ProjectVariant>
 				</Task>
-				<Task Id="5" Disabled="true" Priority="21" CycleTime="100000" AmsPort="352" AdtTasks="true">
+				<Task Id="5" Priority="21" CycleTime="100000" AmsPort="352" AdtTasks="true">
 					<Name>PlcTaskRpcServer</Name>
+					<ProjectVariant PvUseDisable="true" PvUseParameter="true">
+						<Variant>
+							<Name>DEMO</Name>
+							<Disable>0</Disable>
+							<Parameters Priority="21" CycleTime="100000"/>
+						</Variant>
+						<Variant>
+							<Name>LIB</Name>
+							<Name>UNIT_TEST</Name>
+							<Disable>1</Disable>
+							<Parameters Priority="21" CycleTime="100000"/>
+						</Variant>
+					</ProjectVariant>
 				</Task>
-				<Task Id="6" Disabled="true" Priority="22" CycleTime="100000" AmsPort="353" AdtTasks="true">
+				<Task Id="6" Priority="22" CycleTime="100000" AmsPort="353" AdtTasks="true">
 					<Name>PlcTaskRpcClient</Name>
+					<ProjectVariant PvUseDisable="true" PvUseParameter="true">
+						<Variant>
+							<Name>DEMO</Name>
+							<Disable>0</Disable>
+							<Parameters Priority="22" CycleTime="100000"/>
+						</Variant>
+						<Variant>
+							<Name>LIB</Name>
+							<Name>UNIT_TEST</Name>
+							<Disable>1</Disable>
+							<Parameters Priority="22" CycleTime="100000"/>
+						</Variant>
+					</ProjectVariant>
 				</Task>
 			</Tasks>
 		</System>
