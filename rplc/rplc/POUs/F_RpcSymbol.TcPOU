@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="F_RpcSymbol" Id="{207cd139-f197-4a9f-a39c-e4124391a7b8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION INTERNAL F_RpcSymbol : T_MaxString
+VAR_IN_OUT CONSTANT
+	sInstancePath 	: T_MaxString;
+	sSymbolName  	: T_MaxString;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_RpcSymbol := CONCAT(STR1:= sInstancePath, STR2:= GCL.cRpcSymbolSeparator);
+F_RpcSymbol := CONCAT(STR1:= F_RpcSymbol, STR2:= sSymbolName);]]></ST>
+    </Implementation>
+    <LineIds Name="F_RpcSymbol">
+      <LineId Id="10" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

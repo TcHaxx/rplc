@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" ClassName="CNestedPlcProjDef" TcProjectVariant="DEMO">
+	<Project GUID="{992DEA41-1FF5-4E73-9E54-D40AA62F82C0}" Name="RpcClient" PrjFilePath="..\..\..\examples\RpcClient\RpcClient.plcproj" TmcFilePath="..\..\..\examples\RpcClient\RpcClient.tmc" ReloadTmc="true" AmsPort="853" FileArchiveSettings="#x000e" SymbolicMapping="true">
+		<ProjectVariant PvUseDisable="true" PvUseDefine="true">
+			<Variant>
+				<Name>DEMO</Name>
+				<Disable>0</Disable>
+				<Defines></Defines>
+			</Variant>
+			<Variant>
+				<Name>LIB</Name>
+				<Name>UNIT_TEST</Name>
+				<Disable>1</Disable>
+				<Defines/>
+			</Variant>
+		</ProjectVariant>
+		<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="..\examples\RpcClient\RpcClient.tmc" TmcHash="{CD336C35-C2E5-C7E6-13CE-6C5C1E15C1D8}">
+			<Name>RpcClient Instance</Name>
+			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+			<Contexts>
+				<Context>
+					<Id>0</Id>
+					<Name>PlcTask</Name>
+					<ManualConfig>
+						<OTCID>#x02010060</OTCID>
+					</ManualConfig>
+					<Priority>22</Priority>
+					<CycleTime>10000000</CycleTime>
+				</Context>
+			</Contexts>
+			<TaskPouOids>
+				<TaskPouOid Prio="22" OTCID="#x08502081"/>
+			</TaskPouOids>
+		</Instance>
+	</Project>
+</TcSmItem>

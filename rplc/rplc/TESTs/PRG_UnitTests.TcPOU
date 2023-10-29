@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PRG_UnitTests" Id="{e25ec562-542b-45d4-af41-3a64fbc21fb4}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'analysis' := '-33'}
+PROGRAM PRG_UnitTests
+
+VAR
+{IF defined (UNIT_TEST)}	
+	fbF_RpcSymbolTests_SUT	: FB_F_RpcSymbol_Tests;
+	fbRpcTests				: FB_RPC_Tests;
+{END_IF}
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[{IF defined (UNIT_TEST)}
+
+TcUnit.RUN();
+
+{END_IF}]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_UnitTests">
+      <LineId Id="9" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

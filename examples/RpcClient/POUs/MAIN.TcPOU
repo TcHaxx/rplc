@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{b3812910-b416-492a-aa5d-1cfbbaf30e41}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbRpc		: tchaxx.FB_RPC(sAmsNetId:= tchaxx.GCL.cLocalAmsNetId, nAmsPort:= 852, sInstancePath:= 'MAIN.fbRpcServer', sSymbol:= 'Greet');
+	sArg		: T_MaxString := _AppInfo.AppName;
+	sRetVal		: T_MaxString;
+	stRetVal	: ST_AdsStatus;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+stRetVal := fbRpc.Argument(sArg).ReturnValue(sRetVal).Invoke();]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="7" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

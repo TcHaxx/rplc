@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_RpcServer" Id="{5415d0aa-1023-4e78-9aa7-017bf1acac92}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RpcServer
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Greet" Id="{61032f55-ad62-4559-be00-7ade16106678}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD Greet : T_MaxString
+VAR_INPUT
+	sName : T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+Greet := CONCAT(CONCAT('Hello ', sName),'!');]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_RpcServer">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcServer.Greet">
+      <LineId Id="7" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

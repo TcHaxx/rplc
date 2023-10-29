@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GCL" Id="{fd8ee332-2a07-4326-8375-eb19d6efe292}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'no-analysis'}
+{attribute 'global_init_slot' := '49991'}
+VAR_GLOBAL CONSTANT
+	cLocalAmsNetId		: STRING := '127.0.0.1.1.1';
+	cAdsTimeOut			: TIME := Tc2_System.DEFAULT_ADS_TIMEOUT;
+	cRpcSymbolSeparator : STRING := '#';
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_F_RpcSymbol_Tests" Id="{e82e60d6-e9e3-4aa3-844b-1e86542822d8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_F_RpcSymbol_Tests EXTENDS TcUnit.FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	{attribute 'instance-path'} 
+    {attribute 'noinit'} 
+	sTestName			: T_MaxString;
+	sActual				: T_MaxString;
+	sMaxString			: T_MaxString := 'iwgNivAMcHfLkBpkvqNXNWYnMrQNVzUhZFVRYSjRcjnJtRacqFJhzGPkUNrHkvVpMnnxcBtbBwcrvBgfHgaLBQffiYTVjMkCQgidjvwmnvQEQCzVzZUguBPbnEQCfVDbiCMwiEdfqETncfBwbYbhTrSuRhWzNxVpQzBiWeHAGjdWTLmVfyFKEWMhmMgWqFvtAhBarrEkqQCMJvWxGcDZUfMZwdEebgjfuXXMJwGbgzpjyqzigwxkZiHXPvZCmcn';
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+TEST(sTestName);
+
+TEST('Should build RPC symbol successfully');
+
+sActual := F_RpcSymbol('', '');
+AssertEquals_STRING(Expected:= GCL.cRpcSymbolSeparator,
+					Actual:= sActual,
+					Message:= 'Expected # only');
+
+sActual := F_RpcSymbol('abc', '');
+AssertEquals_STRING(Expected:= 'abc#',
+					Actual:= sActual,
+					Message:= 'Expected abc# only');
+
+sActual := F_RpcSymbol('', 'abc');
+AssertEquals_STRING(Expected:= '#abc',
+					Actual:= sActual,
+					Message:= 'Expected #abc only');
+
+sActual := F_RpcSymbol('InstancePath', 'SymbolName');
+AssertEquals_STRING(Expected:= 'InstancePath#SymbolName',
+					Actual:= sActual,
+					Message:= 'Expected InstancePath#SymbolName');
+TEST_FINISHED();
+
+TEST('Should return sInstancePath if > T_MaxString');
+
+sActual := F_RpcSymbol(sMaxString, 'abc');
+AssertEquals_STRING(Expected:= sMaxString,
+					Actual:= sActual,
+					Message:= 'Expected sInstancePath');
+TEST_FINISHED();
+
+TEST('Should truncate if > T_MaxString');
+
+
+sActual := F_RpcSymbol('abc', sMaxString);
+AssertEquals_STRING(Expected:= CONCAT('abc#', LEFT(sMaxString, 251)),
+					Actual:= sActual,
+					Message:= 'Expected abc#iwgNivAMcHfLk...ZiHXPvZ');
+TEST_FINISHED();
+
+TEST_FINISHED_NAMED(sTestName);
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_F_RpcSymbol_Tests">
+      <LineId Id="21" Count="43" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_RPC_Tests" Id="{cbe11911-4728-435a-ba6b-73a9e68e4ee2}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'reflection'}
+FUNCTION_BLOCK FINAL FB_RPC_Tests EXTENDS TcUnit.FB_TestSuite
+VAR
+	{attribute 'instance-path'} 
+    {attribute 'noinit'} 
+	sTestName			: T_MaxString;
+	sActiveStep			: T_MaxString;
+	nSequence			: INT;
+	nSeqOld				: INT;
+	nRpcMethodInvoked 	: UDINT;
+	aSUTs				: ARRAY[0..255] OF I_RpcReleaseHandle;
+END_VAR
+VAR_TEMP
+	eMode	: E_Mode;
+END_VAR
+
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE nSequence OF
+	0:
+		TEST(sTestName);
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep:= sActiveStep, eMode:= E_Mode.INC);
+	1:
+		sActiveStep := 'ShouldInvokeMethod_NoArguments_NoReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_NoArguments_NoReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);
+	2:
+		sActiveStep := 'ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);
+	3:	
+		sActiveStep := 'ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	4:	
+		sActiveStep := 'ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	5:	
+		sActiveStep := 'ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);
+	6:	
+		sActiveStep := 'ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);		
+	7:	
+		sActiveStep := 'ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	8: 
+		sActiveStep := 'ShouldReturnError0x705';
+		TEST(sActiveStep);
+		eMode := ShouldReturnError0x705();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	9: 
+		sActiveStep := 'ShouldReturnError0x710';
+		TEST(sActiveStep);
+		eMode := ShouldReturnError0x710();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	10: 
+		sActiveStep := 'ShouldReleaseAllSymbolHandleSuccessfully';
+		TEST(sActiveStep);
+		eMode := ShouldReleaseAllSymbolHandleSuccessfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	ELSE
+		TEST_FINISHED_NAMED(sTestName);
+END_CASE
+
+IF nSequence <> nSeqOld THEN
+	nRpcMethodInvoked := 0;
+	nSeqOld := nSequence;
+END_IF;]]></ST>
+    </Implementation>
+    <Folder Name="Helper" Id="{782de686-70f2-40b2-98b5-095d810b423d}" />
+    <Folder Name="TestMethods" Id="{88b8acb6-f383-4965-aeba-1d77ff91ad95}" />
+    <Method Name="NoParameter_NoReturnValue" Id="{fe8fa86e-296b-4e40-ab9d-7bf225c643ea}" FolderPath="TestMethods\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD NoParameter_NoReturnValue
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+nRpcMethodInvoked := nRpcMethodInvoked + 1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NoParameter_ReturnValue" Id="{5c2a64b3-1c7b-41ce-bcc0-a7635e3f39bc}" FolderPath="TestMethods\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD NoParameter_ReturnValue : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nRpcMethodInvoked := nRpcMethodInvoked + 1;
+NoParameter_ReturnValue := nRpcMethodInvoked > 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OneParameter_NoReturnValue" Id="{99590e33-c91a-4294-9383-0dff400e0cd5}" FolderPath="TestMethods\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD OneParameter_NoReturnValue
+VAR_INPUT
+	nArg1 	: UDINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nRpcMethodInvoked := nArg1;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Register" Id="{cd0135b3-de6a-46f0-95a5-c26fa1be9a08}" FolderPath="Helper\">
+      <Declaration><![CDATA[METHOD Register
+VAR_INPUT
+	ipRpcReleaseHandle	: I_RpcReleaseHandle;
+END_VAR
+
+VAR
+	i :UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+FOR i:=0 TO 255 DO	
+	IF aSUTs[i] = ipRpcReleaseHandle THEN
+		EXIT;
+	END_IF
+	IF aSUTs[i] <> NULL THEN
+		CONTINUE;
+	END_IF
+	
+	aSUTs[i] := ipRpcReleaseHandle;
+	EXIT;
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShouldInvokeMethod_NoArguments_NoReturnValue_Successfully" Id="{ebc60a66-099b-4039-aae2-2bdc97f0b383}">
+      <Declaration><![CDATA[METHOD ShouldInvokeMethod_NoArguments_NoReturnValue_Successfully : E_Mode
+
+VAR_INST
+	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'NoParameter_NoReturnValue');
+END_VAR
+
+VAR
+	stRetVal	: ST_AdsStatus;
+	eMode		: E_Mode := E_MODE.BUSY;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Arrange
+Register(fbSUT);
+
+// Act
+stRetVal := fbSUT.Invoke();
+
+IF NOT stRetVal.bBusy THEN
+	eMode := E_Mode.INC;
+	
+	// Assert
+	AssertFalse(Condition:= stRetVal.bError, Message:= 'Expected method NoParameter_NoReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= E_AdsErr.NOERR, Actual:= stRetVal.nError, Message:= 'Expected method NoParameter_NoReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= 1, Actual:= nRpcMethodInvoked, Message:= 'Expected method NoParameter_NoReturnValue to be invoked once.');
+END_IF
+
+ShouldInvokeMethod_NoArguments_NoReturnValue_Successfully := eMode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully" Id="{fe09ed6b-dda3-4944-bac3-771b0453401c}">
+      <Declaration><![CDATA[METHOD ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully : E_Mode
+
+VAR_INST
+	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'NoParameter_ReturnValue');
+END_VAR
+
+VAR
+	stRetVal	: ST_AdsStatus;
+	eMode		: E_Mode := E_MODE.BUSY;
+	bActual		: BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Arrange
+Register(fbSUT);
+
+// Act
+stRetVal := fbSUT.ReturnValue(bActual).Invoke();
+
+IF NOT stRetVal.bBusy THEN
+	eMode := E_Mode.INC;
+	// Assert
+	AssertFalse(Condition:= stRetVal.bError, Message:= 'Expected method NoParameter_ReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= E_AdsErr.NOERR, Actual:= stRetVal.nError, Message:= 'Expected method NoParameter_ReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= 1, Actual:= nRpcMethodInvoked, Message:= 'Expected method NoParameter_ReturnValue to be invoked once.');
+	AssertTrue(Condition:= bActual, Message:= 'Expected method NoParameter_ReturnValue to return TRUE.');
+END_IF
+
+ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully := eMode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully" Id="{402c4c52-b3eb-40f7-a68f-1c796a40239a}">
+      <Declaration><![CDATA[METHOD ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully : E_Mode
+
+VAR_INST
+	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'OneParameter_NoReturnValue');
+END_VAR
+
+VAR
+	stRetVal	: ST_AdsStatus;
+	eMode		: E_Mode := E_MODE.BUSY;
+	nArg		: UDINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Arrange
+Register(fbSUT);
+nArg := 123;
+
+// Act
+stRetVal := fbSUT.Argument(nArg).NoReturnValue().Invoke();
+
+IF NOT stRetVal.bBusy THEN
+	eMode := E_Mode.INC;
+	
+	// Assert
+	AssertFalse(Condition:= stRetVal.bError, Message:= 'Expected method OneParameter_NoReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= E_AdsErr.NOERR, Actual:= stRetVal.nError, Message:= 'Expected method OneParameter_NoReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= nArg, Actual:= nRpcMethodInvoked, Message:= 'Expected method OneParameter_NoReturnValue to be invoked with value 123.');
+END_IF
+
+ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully := eMode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully" Id="{2a6e6f72-0f5f-414d-80c0-eaa6ccdb3942}">
+      <Declaration><![CDATA[METHOD ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully : E_Mode
+
+VAR_INST
+	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'ThreeParameters_ReturnValue');
+END_VAR
+
+VAR
+	stRetVal	: ST_AdsStatus;
+	eMode		: E_Mode := E_MODE.BUSY;
+	nArg1		: UDINT;
+	stArg2		: ST_AdsStatus;	// IN_OUT!
+	sArg3		: STRING;
+	sActualRetVal : STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Arrange
+Register(fbSUT);
+nArg1 := 456;
+stArg2.bBusy := FALSE;
+stArg2.bError := TRUE;
+stArg2.nError := 321;
+sArg3 := 'third Argument';
+
+// Act
+stRetVal := fbSUT.Argument(nArg1).VarInOut(stArg2).Argument(sArg3).ReturnValue(sActualRetVal).Invoke();
+
+IF NOT stRetVal.bBusy THEN
+	eMode := E_Mode.INC;
+	
+	// Assert
+	AssertFalse(Condition:= stRetVal.bError, Message:= 'Expected method TwoParameters_ReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= E_AdsErr.NOERR, Actual:= stRetVal.nError, Message:= 'Expected method ThreeParameters_ReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= nArg1, Actual:= nRpcMethodInvoked, Message:= 'Expected method ThreeParameters_ReturnValue to be invoked with value 456.');
+	AssertTrue(Condition:= stArg2.bBusy, Message:= 'Expected method ThreeParameters_ReturnValue to invert bBusy of VAR_IN_OUT');
+	AssertFalse(Condition:= stArg2.bError, Message:= 'Expected method ThreeParameters_ReturnValue to invert bError of VAR_IN_OUT');
+	AssertEquals_UDINT(Expected:= 321 * 2, Actual:= stArg2.nError, Message:= 'Expected method ThreeParameters_ReturnValue to double value nError of VAR_IN_OUT');
+	AssertEquals_STRING(Expected:= sArg3, Actual:= sActualRetVal, Message:= 'Expected method ThreeParameters_ReturnValue to return value .');
+END_IF
+
+ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully := eMode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully" Id="{e1a1bc8c-1ddb-472b-b3c6-bb492613a6f6}">
+      <Declaration><![CDATA[METHOD ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully : E_Mode
+
+VAR_INST
+	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'TwoParameters_ReturnValue');
+END_VAR
+
+VAR
+	stRetVal	: ST_AdsStatus;
+	eMode		: E_Mode := E_MODE.BUSY;
+	nArg1		: UDINT;
+	sArg2		: STRING;
+	sActualRetVal : STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Arrange
+Register(fbSUT);
+nArg1 := 456;
+sArg2 := 'second Argument';
+
+// Act
+stRetVal := fbSUT.Argument(nArg1).Argument(sArg2).ReturnValue(sActualRetVal).Invoke();
+
+IF NOT stRetVal.bBusy THEN
+	eMode := E_Mode.INC;
+	
+	// Assert
+	AssertFalse(Condition:= stRetVal.bError, Message:= 'Expected method TwoParameters_ReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= E_AdsErr.NOERR, Actual:= stRetVal.nError, Message:= 'Expected method TwoParameters_ReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= nArg1, Actual:= nRpcMethodInvoked, Message:= 'Expected method TwoParameters_ReturnValue to be invoked with value 456.');
+	AssertEquals_STRING(Expected:= sArg2, Actual:= sActualRetVal, Message:= 'Expected method TwoParameters_ReturnValue to return value .');
+END_IF
+
+ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully := eMode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully" Id="{5bb2217d-919f-447d-b86d-337aee153857}">
+      <Declaration><![CDATA[METHOD ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully : E_Mode
+
+VAR_INST
+	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'VarInOutConstant_ReturnValue');
+END_VAR
+
+VAR
+	stRetVal	: ST_AdsStatus;
+	eMode		: E_Mode := E_MODE.BUSY;
+	nArg		: ST_AdsStatus;
+	nActualRetVal : UDINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Arrange
+Register(fbSUT);
+nArg.nError := 987;
+
+// Act
+stRetVal := fbSUT.VarInOut(nArg).ReturnValue(nActualRetVal).Invoke();
+
+IF NOT stRetVal.bBusy THEN
+	eMode := E_Mode.INC;
+	
+	// Assert
+	AssertFalse(Condition:= stRetVal.bError, Message:= 'Expected method VarInOutConstant_ReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= E_AdsErr.NOERR, Actual:= stRetVal.nError, Message:= 'Expected method VarInOutConstant_ReturnValue to return no error.');
+	AssertEquals_UDINT(Expected:= 987, Actual:= nArg.nError, Message:= 'Expected method VarInOutConstant_ReturnValue to be invoked with value 987.');
+	AssertEquals_UDINT(Expected:= 987, Actual:= nActualRetVal, Message:= 'Expected method VarInOutConstant_ReturnValue to be invoked with value 987.');
+END_IF
+
+ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully := eMode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShouldReleaseAllSymbolHandleSuccessfully" Id="{9a28eca6-1d82-498c-92be-b1510e63b3b7}">
+      <Declaration><![CDATA[METHOD ShouldReleaseAllSymbolHandleSuccessfully : E_Mode
+
+VAR
+	stRetVal	: ST_AdsStatus;
+	ipSUT		: I_RpcReleaseHandle;
+END_VAR
+
+VAR_INST
+	nIndex 		: UINT := 0;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+
+ipSUT := aSUTs[nIndex];
+IF ipSUT = NULL THEN
+	ShouldReleaseAllSymbolHandleSuccessfully := E_Mode.INC;
+	RETURN;
+END_IF
+
+// Act
+stRetVal := ipSUT.ReleaseHandle();
+
+IF NOT stRetVal.bBusy THEN
+	nIndex := nIndex + 1;	
+	// Assert
+	AssertFalse(Condition:= stRetVal.bError, Message:= 'Expected ReleaseHandle to return no error.');
+	AssertEquals_UDINT(Expected:= E_AdsErr.NOERR, Actual:= stRetVal.nError, Message:= 'Expected ReleaseHandle to return no error.');
+END_IF
+
+ShouldReleaseAllSymbolHandleSuccessfully := E_Mode.BUSY;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShouldReturnError0x705" Id="{fcbe1809-94ef-4fc3-8100-ee156ab487ec}">
+      <Declaration><![CDATA[METHOD ShouldReturnError0x705 : E_Mode
+
+VAR_INST
+	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'NoParameter_NoReturnValue');
+END_VAR
+
+VAR
+	stRetVal	: ST_AdsStatus;
+	eMode		: E_Mode := E_MODE.BUSY;
+	nDummy		: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Act
+stRetVal := fbSUT.Argument(nDummy).NoReturnValue().Invoke();
+
+IF NOT stRetVal.bBusy THEN
+	eMode := E_Mode.INC;
+	
+	// Assert
+	AssertTrue(Condition:= stRetVal.bError, Message:= 'Expected method NoParameter_NoReturnValue to return error.');
+	AssertEquals_UDINT(Expected:= E_AdsErr.DEVICE_INVALIDSIZE, Actual:= stRetVal.nError, Message:= 'Expected method NoParameter_NoReturnValue to return error ADSERR_DEVICE_INVALIDSIZE.');
+	AssertEquals_UDINT(Expected:= 0, Actual:= nRpcMethodInvoked, Message:= 'Expected method NoParameter_NoReturnValue to not be invoked.');
+END_IF
+
+ShouldReturnError0x705 := eMode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ShouldReturnError0x710" Id="{d7a3f3be-7c04-4d09-89b5-a2b705793866}">
+      <Declaration><![CDATA[METHOD ShouldReturnError0x710 : E_Mode
+
+VAR_INST
+	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'NotExistingSymbol');
+END_VAR
+
+VAR
+	stRetVal	: ST_AdsStatus;
+	eMode		: E_Mode := E_MODE.BUSY;
+	nDummy		: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Act
+stRetVal := fbSUT.Argument(nDummy).NoReturnValue().Invoke();
+
+IF NOT stRetVal.bBusy THEN
+	eMode := E_Mode.INC;
+	
+	// Assert
+	AssertTrue(Condition:= stRetVal.bError, Message:= 'Expected return error.');
+	AssertEquals_UDINT(Expected:= E_AdsErr.DEVICE_SYMBOLNOTFOUND, Actual:= stRetVal.nError, Message:= 'Expected error ADSERR_DEVICE_SYMBOLNOTFOUND.');
+END_IF
+
+ShouldReturnError0x710 := eMode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ThreeParameters_ReturnValue" Id="{46ec559a-3fb6-47d8-b43b-5513c26b6c63}" FolderPath="TestMethods\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD ThreeParameters_ReturnValue : STRING
+VAR_INPUT
+	nArg1 	: UDINT;
+END_VAR
+VAR_IN_OUT
+	stArg2  : ST_AdsStatus;
+END_VAR
+VAR_INPUT
+	sArg3	: STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nRpcMethodInvoked := nArg1;
+stArg2.bBusy := NOT stArg2.bBusy;
+stArg2.bError := NOT stARg2.bError;
+stARg2.nError := stARg2.nError * 2;
+ThreeParameters_ReturnValue := sArg3;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TwoParameters_ReturnValue" Id="{dc5d36f9-9a7a-48f8-9ca9-edb900040176}" FolderPath="TestMethods\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD TwoParameters_ReturnValue : STRING
+VAR_INPUT
+	nArg1 	: UDINT;
+	sArg2	: STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nRpcMethodInvoked := nArg1;
+TwoParameters_ReturnValue := sArg2;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="VarInOutConstant_ReturnValue" Id="{cf312003-3ca4-454c-887f-29a94ca68b7e}" FolderPath="TestMethods\">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD VarInOutConstant_ReturnValue : UDINT
+VAR_IN_OUT CONSTANT
+	stArg  : ST_AdsStatus;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[VarInOutConstant_ReturnValue := stArg.nError;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_RPC_Tests">
+      <LineId Id="167" Count="60" />
+      <LineId Id="66" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.NoParameter_NoReturnValue">
+      <LineId Id="7" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.NoParameter_ReturnValue">
+      <LineId Id="16" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.OneParameter_NoReturnValue">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.Register">
+      <LineId Id="7" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="20" Count="2" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ShouldInvokeMethod_NoArguments_NoReturnValue_Successfully">
+      <LineId Id="75" Count="2" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="64" Count="1" />
+      <LineId Id="51" Count="1" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully">
+      <LineId Id="86" Count="2" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully">
+      <LineId Id="86" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="89" Count="1" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully">
+      <LineId Id="130" Count="0" />
+      <LineId Id="147" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="123" Count="2" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="132" Count="1" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="126" Count="2" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully">
+      <LineId Id="110" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="113" Count="1" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully">
+      <LineId Id="110" Count="0" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="113" Count="1" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ShouldReleaseAllSymbolHandleSuccessfully">
+      <LineId Id="55" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="18" Count="4" />
+      <LineId Id="24" Count="2" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ShouldReturnError0x705">
+      <LineId Id="26" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="9" Count="2" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ShouldReturnError0x710">
+      <LineId Id="26" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.ThreeParameters_ReturnValue">
+      <LineId Id="7" Count="0" />
+      <LineId Id="36" Count="2" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.TwoParameters_ReturnValue">
+      <LineId Id="7" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Tests.VarInOutConstant_ReturnValue">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

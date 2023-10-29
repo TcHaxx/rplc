@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_ArgsBuffer" Id="{65cdd72b-1ddc-4407-8b79-887e4a3bb4e4}">
+    <Declaration><![CDATA[INTERFACE I_ArgsBuffer
+]]></Declaration>
+    <Property Name="nArgsLength" Id="{f3f09894-ef6d-4f36-b386-c1e57f0d054f}">
+      <Declaration><![CDATA[PROPERTY nArgsLength : UDINT]]></Declaration>
+      <Get Name="Get" Id="{450d33f4-7513-49de-a50f-85769b95dad8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="nRetValLength" Id="{320f8c47-ee1c-4f27-83be-9ada31a05186}">
+      <Declaration><![CDATA[PROPERTY nRetValLength : UDINT]]></Declaration>
+      <Get Name="Get" Id="{df4b17fa-d390-425c-9bd8-79ce6fbe65ef}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="pArgsBuffer" Id="{e4bf0197-c4c9-4d06-84c3-2232959f9d61}">
+      <Declaration><![CDATA[PROPERTY pArgsBuffer : POINTER TO BYTE]]></Declaration>
+      <Get Name="Get" Id="{6d6fd156-0ec4-4abb-8032-23a6146b2b29}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="pRetValBuffer" Id="{ce7fe5dc-b9e0-4679-b8f2-34a9f8606a6b}">
+      <Declaration><![CDATA[PROPERTY pRetValBuffer : POINTER TO BYTE]]></Declaration>
+      <Get Name="Get" Id="{0c174ef9-ae21-43a1-b164-fd9fa7e2d0f1}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

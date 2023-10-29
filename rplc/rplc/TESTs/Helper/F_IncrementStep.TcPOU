@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="F_IncrementStep" Id="{701464ed-4ab7-4ccb-a3fd-1cc65c5b3c94}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_IncrementStep
+VAR_IN_OUT
+	nStepToInc : INT; 
+END_VAR
+VAR_IN_OUT CONSTANT
+	sActiveStep : T_MaxString; 
+END_VAR
+VAR_INPUT
+	eMode : E_Mode;
+END_VAR
+VAR CONSTANT
+	cStepFinished : INT := -999;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE eMode OF
+	E_Mode.BUSY:
+		RETURN;
+	E_Mode.INC:
+		nStepToInc := nStepToInc + 1;
+		IF sActiveStep <> '' THEN
+			TEST_FINISHED_NAMED(sActiveStep);
+		END_IF
+	E_Mode.END:
+		nStepToInc := cStepFinished;
+		IF sActiveStep <> '' THEN
+			TEST_FINISHED_NAMED(sActiveStep);
+		END_IF
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="F_IncrementStep">
+      <LineId Id="22" Count="1" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="63" Count="1" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="24" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

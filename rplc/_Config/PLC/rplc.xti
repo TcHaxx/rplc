@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" ClassName="CNestedPlcProjDef" TcProjectVariant="DEMO">
+	<Project Disabled="true" GUID="{2B7A2B50-C2BA-4BEB-8DA8-1F5A3CF7495E}" Name="rplc" PrjFilePath="..\..\rplc\rplc.plcproj" TmcFilePath="..\..\rplc\rplc.tmc" EnableImplicitDefines="true" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+		<ProjectVariant PvUseDisable="true" PvUseDefine="true">
+			<Variant>
+				<Name>DEMO</Name>
+				<Disable>1</Disable>
+				<Defines/>
+			</Variant>
+			<Variant>
+				<Name>LIB</Name>
+				<Name>UNIT_TEST</Name>
+				<Disable>0</Disable>
+				<Defines></Defines>
+			</Variant>
+		</ProjectVariant>
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="rplc\rplc.tmc" TmcHash="{F7C9FBA1-8348-4CC9-887D-3606193630F7}">
+			<Name>rplc Instance</Name>
+			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+			<Contexts>
+				<Context>
+					<Id>0</Id>
+					<Name>PlcTaskUnitTest</Name>
+					<ManualConfig>
+						<OTCID>#x02010040</OTCID>
+					</ManualConfig>
+					<Priority>1</Priority>
+					<CycleTime>10000000</CycleTime>
+				</Context>
+			</Contexts>
+			<TaskPouOids>
+				<TaskPouOid Prio="1" OTCID="#x08502002"/>
+			</TaskPouOids>
+		</Instance>
+	</Project>
+</TcSmItem>

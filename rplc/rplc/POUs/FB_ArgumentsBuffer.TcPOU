@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_ArgumentsBuffer" Id="{01fc2ce9-8258-4492-a9de-29c5e969f7ab}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'do not call this POU directly'}
+{attribute 'hide_all_locals'}
+FUNCTION_BLOCK INTERNAL FINAL FB_ArgumentsBuffer IMPLEMENTS I_ArgsBuffer
+
+VAR
+	aArgsBuffer				: ARRAY [0..cMaxArgsBuffer - 1] OF BYTE;
+	nArgsBufferIndex		: UDINT := 0;
+	aAnyArgs				: ARRAY [0..cMaxArgs - 1] OF ST_AnyType;
+	nAnyArgsIndex			: UDINT := 0;
+	
+	aVarInOutBuffer			: ARRAY [0..cMaxArgsBuffer - 1] OF BYTE;
+	nVarInOutBufferIndex	: UDINT := 0;
+	aAnyVarInOut			: ARRAY [0..cMaxArgs - 1] OF ST_AnyType;
+	nAnyVarInOutIndex		: UDINT := 0;
+	
+	nRetValSizeTotal		: UDINT := 0;						// total size in Bytes of all In/Out arguments + return value
+	stAnyRetVal				: ST_AnyType;
+	
+END_VAR
+
+VAR CONSTANT
+	cMaxArgsBuffer		: UINT := 256; 							// max sizeof aArgs buffer array.
+	cMaxArgs			: USINT := 32;							// max length method arguments
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="GetRetVal" Id="{cea3cce3-196b-409a-a8b2-458a46d7fe57}">
+      <Declaration><![CDATA[METHOD GetRetVal : E_AdsErr
+VAR_INPUT
+END_VAR
+VAR 
+	i : UDINT;
+	nLen : UDINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nVarInOutBufferIndex := 0;
+
+IF stAnyRetVal.pValue <> NULL THEN
+	nLen := TO_UDINT(stAnyRetVal.nSize);
+	IF nLen > SIZEOF(aVarInOutBuffer) THEN
+		GetRetVal := E_AdsErr.DEVICE_NOMEMORY;
+		RETURN;
+	END_IF
+	MEMCPY(destAddr:= stAnyRetVal.pValue, srcAddr:= ADR(aVarInOutBuffer), n:= nLen);
+	nVarInOutBufferIndex := nVarInOutBufferIndex + nLen;
+END_IF
+
+
+FOR i:=0 TO nAnyVarInOutIndex DO
+	nLen := TO_UDINT(aAnyVarInOut[i].nSize);
+	IF nLen + nVarInOutBufferIndex > SIZEOF(aVarInOutBuffer) THEN
+		GetRetVal := E_AdsErr.DEVICE_NOMEMORY;
+		RETURN;
+	END_IF	
+	MEMCPY(destAddr:= aAnyVarInOut[i].pValue, srcAddr:= ADR(aVarInOutBuffer[nVarInOutBufferIndex]), n:= nLen);
+	nVarInOutBufferIndex := nVarInOutBufferIndex + nLen;
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="nArgsLength" Id="{3e6406d3-8559-4369-8794-72dca5ed68cf}">
+      <Declaration><![CDATA[PROPERTY nArgsLength : UDINT]]></Declaration>
+      <Get Name="Get" Id="{e52e01cc-4c3d-45ab-9d8c-cead13bb0390}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nArgsLength := THIS^.nArgsBufferIndex;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="nRetValLength" Id="{10a70af2-342c-4cd7-a4b9-537f204ec7aa}">
+      <Declaration><![CDATA[PROPERTY nRetValLength : UDINT]]></Declaration>
+      <Get Name="Get" Id="{bc8f807e-783a-40f3-87b0-5a44c6432025}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nRetValLength := THIS^.nRetValSizeTotal;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="pArgsBuffer" Id="{c49081a2-557a-4182-8ca4-052eb5e6773a}">
+      <Declaration><![CDATA[PROPERTY pArgsBuffer : POINTER TO BYTE]]></Declaration>
+      <Get Name="Get" Id="{67937687-456a-4488-99a4-7326b63d9c7e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[pArgsBuffer := ADR(aArgsBuffer);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="pRetValBuffer" Id="{56f5b221-f6a8-4b86-b562-294dbe5aec0f}">
+      <Declaration><![CDATA[PROPERTY pRetValBuffer : POINTER TO BYTE]]></Declaration>
+      <Get Name="Get" Id="{784ee8ca-e535-4ada-90d4-785a8560acee}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[pRetValBuffer := ADR(aVarInOutBuffer);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Reset" Id="{4657a562-c23a-44ff-8c73-bd0243b995cf}">
+      <Declaration><![CDATA[METHOD Reset
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMSET(ADR(aArgsBuffer), 16#0, SIZEOF(aArgsBuffer));
+MEMSET(ADR(aAnyArgs), 16#0, SIZEOF(aAnyArgs));
+MEMSET(ADR(aVarInOutBuffer), 16#0, SIZEOF(aVarInOutBuffer));
+MEMSET(ADR(aAnyVarInOut), 16#0, SIZEOF(aAnyVarInOut));
+MEMSET(ADR(stAnyRetVal), 16#0, SIZEOF(stAnyRetVal));
+nAnyArgsIndex := 0;
+nArgsBufferIndex := 0;
+nArgsBufferIndex := 0;
+nAnyVarInOutIndex := 0;
+nRetValSizeTotal := 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetArgument" Id="{d617d063-fc4d-4b6f-8fcb-4090766deee1}">
+      <Declaration><![CDATA[METHOD SetArgument : E_AdsErr
+VAR_INPUT
+	stAny : ST_AnyType;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF nArgsBufferIndex + TO_UDINT(stAny.nSize) > SIZEOF(aArgsBuffer) THEN
+	SetArgument := E_AdsErr.DEVICE_NOMEMORY;
+	RETURN;
+END_IF
+IF nAnyArgsIndex > cMaxArgs -1  THEN
+	SetArgument := E_AdsErr.DEVICE_NOMEMORY;
+	RETURN;
+END_IF
+
+aAnyArgs[nAnyArgsIndex] := stAny;
+nAnyArgsIndex := nAnyArgsIndex + 1;
+
+MEMCPY(ADR(aArgsBuffer[nArgsBufferIndex]), stAny.pValue , TO_UDINT(stAny.nSize));
+nArgsBufferIndex := nArgsBufferIndex + TO_UDINT(stAny.nSize);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetRetVal" Id="{39b01f18-bac1-4ecc-9b9c-1bb5c8a3f6d6}">
+      <Declaration><![CDATA[METHOD SetRetVal
+VAR_INPUT
+	stAny : ST_AnyType;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+stAnyRetVal := stAny;
+nRetValSizeTotal := nRetValSizeTotal + TO_UDINT(stAny.nSize);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetVarInOut" Id="{d7cee7c5-ec2a-4636-8a08-f85c8fcac249}">
+      <Declaration><![CDATA[METHOD SetVarInOut : E_AdsErr
+VAR_INPUT
+	stAny : ST_AnyType;
+END_VAR
+VAR
+	eAdsErr : E_AdsErr;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF stAny.pValue = NULL OR stAny.nSize <= 0 THEN
+	SetVarInOut := E_AdsErr.DEVICE_INVALIDPARM;
+	RETURN;
+END_IF
+IF nVarInOutBufferIndex + TO_UDINT(stAny.nSize) > SIZEOF(aVarInOutBuffer) THEN
+	SetVarInOut := E_AdsErr.DEVICE_NOMEMORY;
+	RETURN;
+END_IF
+IF nAnyVarInOutIndex > cMaxArgs -1  THEN
+	SetVarInOut := E_AdsErr.DEVICE_NOMEMORY;
+	RETURN;
+END_IF
+
+eAdsErr := SetArgument(stAny);
+IF eAdsErr <> E_AdsErr.NOERR THEN
+	RETURN;
+END_IF
+
+
+aAnyVarInOut[nAnyVarInOutIndex] := stAny;
+nAnyVarInOutIndex := nAnyVarInOutIndex + 1;
+nRetValSizeTotal := nRetValSizeTotal + TO_UDINT(stAny.nSize);]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_ArgumentsBuffer">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ArgumentsBuffer.GetRetVal">
+      <LineId Id="47" Count="1" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="41" Count="2" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="50" Count="2" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="30" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ArgumentsBuffer.nArgsLength.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ArgumentsBuffer.nRetValLength.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ArgumentsBuffer.pArgsBuffer.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ArgumentsBuffer.pRetValBuffer.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ArgumentsBuffer.Reset">
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="6" Count="1" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ArgumentsBuffer.SetArgument">
+      <LineId Id="41" Count="0" />
+      <LineId Id="31" Count="2" />
+      <LineId Id="44" Count="2" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ArgumentsBuffer.SetRetVal">
+      <LineId Id="8" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ArgumentsBuffer.SetVarInOut">
+      <LineId Id="29" Count="1" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="17" Count="6" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="12" Count="2" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="25" Count="3" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_RpcReleaseHandle" Id="{bb98d4ca-0a35-4682-8ad6-8c5cd7a7858b}">
+    <Declaration><![CDATA[INTERFACE I_RpcReleaseHandle
+]]></Declaration>
+    <Method Name="ReleaseHandle" Id="{2bfcaf86-a73b-4e47-95bc-846f7865c600}">
+      <Declaration><![CDATA[METHOD ReleaseHandle : ST_AdsStatus
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

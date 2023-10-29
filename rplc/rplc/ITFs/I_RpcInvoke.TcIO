@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_RpcInvoke" Id="{c25a107c-452a-4c37-94bc-4b2d6880066d}">
+    <Declaration><![CDATA[INTERFACE I_RpcInvoke
+]]></Declaration>
+    <Method Name="Invoke" Id="{d352277c-54f8-443f-a049-1475878c0922}">
+      <Declaration><![CDATA[METHOD Invoke : ST_AdsStatus
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
