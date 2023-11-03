@@ -5,7 +5,11 @@ Invoke `RPC` methods from `TwinCAT PLC` using `ADS`.
 
 ## Prerequisites
 A RPC server (here another PLC, same machine `LocalAmsNetId`, different ADS Port `852`) provides following method signature:
+> **NOTE**  
+> The method has to have the attribute `TcRpcEnable` in order to be invocable via RPC,  
+> see [Beckhoff InfoSys - Attribute 'TcRpcEnable'](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/7145472907.html)
 ```
+{attribute 'TcRpcEnable'}
 METHOD Greet : T_MaxString
 VAR_INPUT
 	sName : T_MaxString;
