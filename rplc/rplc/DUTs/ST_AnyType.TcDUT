@@ -6,6 +6,7 @@ TYPE ST_AnyType :
 STRUCT
 	pValue : PVOID;
 	nSize  : DINT;
+	TypeClass : __SYSTEM.TYPE_CLASS;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
