@@ -3,12 +3,6 @@
   <Itf Name="I_RpcArguments" Id="{f01db549-96f9-4574-a861-747d1e7a3b06}">
     <Declaration><![CDATA[INTERFACE I_RpcArguments
 ]]></Declaration>
-    <Method Name="Argument" Id="{968e2530-cbac-40a7-82b0-950291c5a931}">
-      <Declaration><![CDATA[METHOD Argument : I_RpcArguments
-VAR_INPUT
-	anyArg	: ANY;
-END_VAR]]></Declaration>
-    </Method>
     <Method Name="NoReturnValue" Id="{fe67e016-bc9b-4392-8c32-1218f7b4b53d}">
       <Declaration><![CDATA[METHOD NoReturnValue : I_RpcInvoke
 VAR_INPUT
@@ -28,6 +22,18 @@ VAR_INPUT
 	anyArg	: ANY;
 END_VAR
 ]]></Declaration>
+    </Method>
+    <Method Name="VarInput" Id="{968e2530-cbac-40a7-82b0-950291c5a931}">
+      <Declaration><![CDATA[METHOD VarInput : I_RpcArguments
+VAR_INPUT
+	anyArg	: ANY;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="VarOutput" Id="{b0441363-d524-4a34-8dcc-abd11b12ecea}">
+      <Declaration><![CDATA[METHOD VarOutput : I_RpcArguments
+VAR_INPUT
+	anyArg	: ANY;
+END_VAR]]></Declaration>
     </Method>
   </Itf>
 </TcPlcObject>
