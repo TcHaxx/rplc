@@ -19,7 +19,7 @@
     <Company>tchaxx</Company>
     <Released>false</Released>
     <Title>rplc</Title>
-    <ProjectVersion>0.2.0.0</ProjectVersion>
+    <ProjectVersion>0.2.1.0</ProjectVersion>
     <Author>densogiaichned</Author>
     <Description>Invoke RPC methods.</Description>
     <CompilerDefines />
@@ -43,6 +43,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GVLs\GCL.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\Param_Args.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>

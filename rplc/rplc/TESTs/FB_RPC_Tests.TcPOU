@@ -375,16 +375,16 @@ END_VAR
 VAR
 	stRetVal	: ST_AdsStatus;
 	eMode		: E_Mode := E_MODE.BUSY;
-	nArg		: ST_AdsStatus;
+	stArg		: ST_LibVersion;
 	nActualRetVal : UDINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Arrange
 Register(fbSUT);
-nArg.nError := 987;
+stArg.nFlags := 987;
 
 // Act
-stRetVal := fbSUT.VarInOut(nArg).ReturnValue(nActualRetVal).Invoke();
+stRetVal := fbSUT.VarInOut(stArg).ReturnValue(nActualRetVal).Invoke();
 
 IF NOT stRetVal.bBusy THEN
 	eMode := E_Mode.INC;
@@ -392,7 +392,7 @@ IF NOT stRetVal.bBusy THEN
 	// Assert
 	AssertFalse(Condition:= stRetVal.bError, Message:= 'Expected method VarInOutConstant_ReturnValue to return no error.');
 	AssertEquals_UDINT(Expected:= E_AdsErr.NOERR, Actual:= stRetVal.nError, Message:= 'Expected method VarInOutConstant_ReturnValue to return no error.');
-	AssertEquals_UDINT(Expected:= 987, Actual:= nArg.nError, Message:= 'Expected method VarInOutConstant_ReturnValue to be invoked with value 987.');
+	AssertEquals_DWORD(Expected:= 987, Actual:= stArg.nFlags, Message:= 'Expected method VarInOutConstant_ReturnValue to be invoked with value 987.');
 	AssertEquals_UDINT(Expected:= 987, Actual:= nActualRetVal, Message:= 'Expected method VarInOutConstant_ReturnValue to be invoked with value 987.');
 END_IF
 
@@ -622,12 +622,12 @@ TwoVarOutput_ReturnValue := 456;]]></ST>
     </Method>
     <Method Name="VarInOutConstant_ReturnValue" Id="{cf312003-3ca4-454c-887f-29a94ca68b7e}" FolderPath="TestMethods\">
       <Declaration><![CDATA[{attribute 'TcRpcEnable'}
-METHOD VarInOutConstant_ReturnValue : UDINT
+METHOD VarInOutConstant_ReturnValue : DWORD
 VAR_IN_OUT CONSTANT
-	stArg  : ST_AdsStatus;
+	stArg  : ST_LibVersion;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[VarInOutConstant_ReturnValue := stArg.nError;]]></ST>
+        <ST><![CDATA[VarInOutConstant_ReturnValue := stArg.nFlags;]]></ST>
       </Implementation>
     </Method>
     <Method Name="VarInput_VarInOut_VarOutput_ReturnValue" Id="{a1d2971b-a107-4ae8-a338-f0a20b0b8707}" FolderPath="TestMethods\">
@@ -811,7 +811,7 @@ VarOutput_ReturnValue := 123;]]></ST>
       <LineId Id="110" Count="0" />
       <LineId Id="139" Count="0" />
       <LineId Id="83" Count="0" />
-      <LineId Id="112" Count="0" />
+      <LineId Id="151" Count="0" />
       <LineId Id="111" Count="0" />
       <LineId Id="33" Count="0" />
       <LineId Id="85" Count="0" />

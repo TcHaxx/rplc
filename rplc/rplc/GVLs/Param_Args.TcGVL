@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="Param_Args" Id="{7a1b6cbd-a8b8-4ed1-9d1a-102b15a894df}" ParameterList="True">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'no-analysis'}
+VAR_GLOBAL CONSTANT
+	cMaxArgsBuffer		: UINT(64..16384) 	:= 1024;	// max sizeof aArgs buffer array in bytes.
+	cMaxArgs			: USINT(1..128) 	:= 32;		// max length method arguments
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

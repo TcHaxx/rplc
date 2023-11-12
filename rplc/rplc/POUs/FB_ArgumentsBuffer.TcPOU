@@ -22,8 +22,8 @@ VAR
 END_VAR
 
 VAR CONSTANT
-	cMaxArgsBuffer		: UINT := 256; 							// max sizeof aArgs buffer array.
-	cMaxArgs			: USINT := 32;							// max length method arguments
+	cMaxArgsBuffer		: UINT := Param_Args.cMaxArgsBuffer;	// max sizeof aArgs buffer array.
+	cMaxArgs			: USINT := Param_Args.cMaxArgs;			// max length method arguments
 END_VAR
 ]]></Declaration>
     <Implementation>
