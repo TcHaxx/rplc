@@ -4,18 +4,26 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	fbRpc		: tchaxx.FB_RPC(sAmsNetId:= tchaxx.GCL.cLocalAmsNetId, nAmsPort:= 852, sInstancePath:= 'MAIN.fbRpcServer', sSymbol:= 'Greet');
-	sArg		: T_MaxString := _AppInfo.AppName;
-	sRetVal		: T_MaxString;
-	stRetVal	: ST_AdsStatus;
+	
+	// Arguments and RetVal
+	sArg  : T_MaxString := _AppInfo.AppName;
+	nLen  : INT;
+	stLibVersion : ST_LibVersion := Tc3_Module.Global_Version.stLibVersion_Tc3_Module;
+	sRetVal : T_MaxString;
+	stRetVal : ST_AdsStatus;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-
-stRetVal := fbRpc.Argument(sArg).ReturnValue(sRetVal).Invoke();]]></ST>
+stRetVal := fbRpc.VarInput(sArg)
+                 .VarOutput(nLen)
+                 .VarInOut(stLibVersion)
+                 .ReturnValue(sRetVal)
+                 .Invoke();]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="7" Count="1" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="33" Count="3" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

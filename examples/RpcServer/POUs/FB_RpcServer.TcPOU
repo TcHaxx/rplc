@@ -18,19 +18,29 @@ METHOD Greet : T_MaxString
 VAR_INPUT
 	sName : T_MaxString;
 END_VAR
+VAR_OUTPUT
+	nLen : INT;
+END_VAR
+VAR_IN_OUT CONSTANT
+	stLibVersion : ST_LibVersion;
+END_VAR
+
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[
+Greet := CONCAT(CONCAT(CONCAT('Hello ', sName), '! LibVersion: '), stLibVersion.sVersion);
 
-Greet := CONCAT(CONCAT('Hello ', sName),'!');]]></ST>
+nLen := LEN(Greet);]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_RpcServer">
       <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_RpcServer.Greet">
-      <LineId Id="7" Count="1" />
+      <LineId Id="8" Count="0" />
       <LineId Id="5" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="23" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
