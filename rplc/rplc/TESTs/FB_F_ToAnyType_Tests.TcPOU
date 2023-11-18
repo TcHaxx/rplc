@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_F_ToAnyType_Tests" Id="{9678f477-b4b1-4e46-995f-b9e31b9d88fd}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'reflection'}
+FUNCTION_BLOCK INTERNAL FINAL FB_F_ToAnyType_Tests EXTENDS TcUnit.FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	{attribute 'instance-path'} 
+    {attribute 'noinit'} 
+	sTestName			: T_MaxString;
+	
+	stDummy				: ST_AmsAddr;
+	stActual			: ST_AnyType;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TEST(sTestName);
+
+TEST('Should convert __SYSTEM.AnyTpe to ST_AnyType successfully');
+
+// Act
+stActual := F_ToAnyType(stDummy);
+
+// Assert
+AssertEquals_ULINT(Expected:= ADR(stDummy),
+					Actual:= stActual.pValue,
+					Message:= 'Pointervalue did not match');
+AssertEquals_DINT(Expected:= SIZEOF(stDummy),
+					Actual:= stActual.nSize,
+					Message:= 'Size did not match');
+AssertEquals_DWORD(Expected:= __SYSTEM.TYPE_CLASS.TYPE_USERDEF,
+					Actual:= stActual.TypeClass,
+					Message:= 'TypeClass did not match');
+TEST_FINISHED();
+
+TEST_FINISHED_NAMED(sTestName);]]></ST>
+    </Implementation>
+    <LineIds Name="FB_F_ToAnyType_Tests">
+      <LineId Id="9" Count="0" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="33" Count="1" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="46" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

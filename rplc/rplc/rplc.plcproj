@@ -74,7 +74,13 @@
     <Compile Include="POUs\F_RpcSymbol.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\F_ToAnyType.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TESTs\FB_F_RpcSymbol_Tests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TESTs\FB_F_ToAnyType_Tests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TESTs\FB_RPC_Tests.TcPOU">
