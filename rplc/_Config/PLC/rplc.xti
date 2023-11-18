@@ -18,7 +18,7 @@
 				<Defines></Defines>
 			</Variant>
 		</ProjectVariant>
-		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="rplc\rplc.tmc" TmcHash="{F7F0AE6E-510C-1B59-5446-87BD443E1B72}">
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="rplc\rplc.tmc" TmcHash="{99CA0E7D-408B-E0BA-B619-3B84684A41AB}">
 			<Name>rplc Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 			<Contexts>

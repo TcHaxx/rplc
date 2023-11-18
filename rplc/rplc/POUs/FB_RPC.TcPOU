@@ -262,8 +262,7 @@ IF anyRetVal.diSize <= 0 THEN
 	RETURN;
 END_IF
 
-stAny.pValue := anyRetVal.pValue;
-stAny.nSize := anyRetVal.diSize;
+stAny := F_ToAnyType(anyRetVal);
 
 fbArguments.SetRetVal(stAny);
 ]]></ST>
@@ -311,8 +310,7 @@ IF anyArg.diSize <= 0 THEN
 	RETURN;
 END_IF
 
-stAny.pValue := anyArg.pValue;
-stAny.nSize := anyArg.diSize;
+stAny := F_ToAnyType(anyArg);
 
 eAdsErr := fbArguments.SetVarInOut(stAny);
 IF eAdsErr <> E_AdsErr.NOERR THEN
@@ -336,8 +334,7 @@ IF eArgs = LOCK THEN
 	RETURN;
 END_IF
 
-stAny.pValue := anyArg.pValue;
-stAny.nSize := anyArg.diSize;
+stAny := F_ToAnyType(anyArg);
 
 eAdsErr := fbArguments.SetVarInput(stAny);
 IF eAdsErr <> E_AdsErr.NOERR THEN
@@ -361,9 +358,7 @@ IF eArgs = LOCK THEN
 	RETURN;
 END_IF
 
-stAny.pValue := anyArg.pValue;
-stAny.nSize := anyArg.diSize;
-stAny.TypeClass := anyArg.TypeClass;
+stAny := F_ToAnyType(anyArg);
 
 eAdsErr := fbArguments.SetVarOutput(stAny);
 IF eAdsErr <> E_AdsErr.NOERR THEN
@@ -431,7 +426,8 @@ END_IF]]></ST>
       <LineId Id="8" Count="0" />
     </LineIds>
     <LineIds Name="FB_RPC.ReturnValue">
-      <LineId Id="19" Count="13" />
+      <LineId Id="19" Count="9" />
+      <LineId Id="30" Count="2" />
       <LineId Id="18" Count="0" />
     </LineIds>
     <LineIds Name="FB_RPC.tAdsTimeOut.Get">
@@ -443,17 +439,23 @@ END_IF]]></ST>
       <LineId Id="6" Count="0" />
     </LineIds>
     <LineIds Name="FB_RPC.VarInOut">
-      <LineId Id="26" Count="15" />
+      <LineId Id="26" Count="9" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="39" Count="2" />
       <LineId Id="18" Count="0" />
     </LineIds>
     <LineIds Name="FB_RPC.VarInput">
-      <LineId Id="22" Count="11" />
+      <LineId Id="22" Count="6" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="31" Count="2" />
       <LineId Id="18" Count="0" />
     </LineIds>
     <LineIds Name="FB_RPC.VarOutput">
-      <LineId Id="22" Count="7" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="30" Count="3" />
+      <LineId Id="22" Count="5" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="31" Count="2" />
       <LineId Id="18" Count="0" />
     </LineIds>
   </POU>
