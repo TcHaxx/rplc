@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="FB_F_RpcSymbol_Tests" Id="{e82e60d6-e9e3-4aa3-844b-1e86542822d8}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_F_RpcSymbol_Tests EXTENDS TcUnit.FB_TestSuite
+    <Declaration><![CDATA[{attribute 'reflection'}
+FUNCTION_BLOCK INTERNAL FINAL FB_F_RpcSymbol_Tests EXTENDS TcUnit.FB_TestSuite
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
