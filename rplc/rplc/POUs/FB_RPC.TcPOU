@@ -54,7 +54,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Initialize();
+        <ST><![CDATA[Reset();
 
 IF bInCopyCode THEN
 	ReleaseHandle();
@@ -96,20 +96,6 @@ END_VAR
 	BUSY=> GetSymbolHandleByName.bBusy, 
 	ERR=> GetSymbolHandleByName.bError, 
 	ERRID=> GetSymbolHandleByName.nError);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="Initialize" Id="{c87535b2-cb59-4680-8a4e-d44d93bf7cf8}">
-      <Declaration><![CDATA[METHOD PRIVATE Initialize
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[ResetArguments();
-nHandleToRelease := cNoSymbolNameHandle;
-fbAdsWrReqRelHandle(WRITE:= FALSE);
-fbRdWrReq(WRTRD:= FALSE);
-eArgs := NO_LOCK;
-]]></ST>
       </Implementation>
     </Method>
     <Method Name="Invoke" Id="{8851f7d7-adbe-4317-9571-95d25ada74e0}" FolderPath="ITFs\">
@@ -232,6 +218,21 @@ IF NOT fbAdsWrReqRelHandle.BUSY OR fbAdsWrReqRelHandle.ERR THEN
 	eStep := HNDBYNAME;
 	nHandleToRelease := cNoSymbolNameHandle;	
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{f246ef36-16e6-4bb1-af7d-a42ce6aec18d}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ResetArguments();
+ReleaseHandle();
+nHandleToRelease := cNoSymbolNameHandle;
+fbAdsWrReqRelHandle(WRITE:= FALSE);
+fbRdWrReq(WRTRD:= FALSE);
+eArgs := NO_LOCK;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="ResetArguments" Id="{91d66985-f93c-4427-bdfe-fa7879f2ade4}">
@@ -392,11 +393,6 @@ END_IF]]></ST>
       <LineId Id="33" Count="12" />
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_RPC.Initialize">
-      <LineId Id="6" Count="1" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="11" Count="2" />
-    </LineIds>
     <LineIds Name="FB_RPC.Invoke">
       <LineId Id="8" Count="34" />
       <LineId Id="4" Count="0" />
@@ -421,6 +417,12 @@ END_IF]]></ST>
     <LineIds Name="FB_RPC.ReleaseHandle">
       <LineId Id="5" Count="24" />
       <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC.Reset">
+      <LineId Id="6" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="7" Count="3" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_RPC.ResetArguments">
       <LineId Id="8" Count="0" />

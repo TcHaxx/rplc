@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" TcProjectVariant="DEMO">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" TcProjectVariant="UNIT_TEST">
 	<Project ProjectGUID="{F28E373C-0939-463B-84B1-411776C73026}" TargetNetId="41.143.68.207.1.1" Target64Bit="true" ShowHideConfigurations="#x6">
 		<System>
 			<Tasks>
@@ -19,7 +19,7 @@
 						</Variant>
 					</ProjectVariant>
 				</Task>
-				<Task Id="4" Disabled="true" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
+				<Task Id="4" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
 					<Name>PlcTaskUnitTest</Name>
 					<ProjectVariant PvUseDisable="true" PvUseParameter="true">
 						<Variant>
@@ -35,7 +35,7 @@
 						</Variant>
 					</ProjectVariant>
 				</Task>
-				<Task Id="5" Priority="21" CycleTime="100000" AmsPort="352" AdtTasks="true">
+				<Task Id="5" Disabled="true" Priority="21" CycleTime="100000" AmsPort="352" AdtTasks="true">
 					<Name>PlcTaskRpcServer</Name>
 					<ProjectVariant PvUseDisable="true" PvUseParameter="true">
 						<Variant>
@@ -51,7 +51,7 @@
 						</Variant>
 					</ProjectVariant>
 				</Task>
-				<Task Id="6" Priority="22" CycleTime="100000" AmsPort="353" AdtTasks="true">
+				<Task Id="6" Disabled="true" Priority="22" CycleTime="100000" AmsPort="353" AdtTasks="true">
 					<Name>PlcTaskRpcClient</Name>
 					<ProjectVariant PvUseDisable="true" PvUseParameter="true">
 						<Variant>
