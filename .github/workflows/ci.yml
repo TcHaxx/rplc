@@ -1,0 +1,34 @@
+name: CI
+on:
+  push:
+  branches:
+      - main
+    paths:
+      - 'rplc/**'
+      - 'examples/**'
+
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+  jobs:
+    ci:
+      name: CI
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Build rplc
+          uses: Zeugwerk/zkbuild-action@1.0.0
+          with:
+              username: ${{ secrets.ACTIONS_ZGWK_USERNAME }}
+              password: ${{ secrets.ACTIONS_ZGWK_PASSWORD }}
+        - name: Upload *.library
+          uses: actions/upload-artifact@v3
+          with:
+              name: rplc
+              path: |
+              **/*.compiled-library
+              **/*.library

@@ -1,0 +1,10 @@
+root = true
+
+[*]
+indent_style = space
+
+[*.xml]
+indent_size = 2
+
+[*.{yml,yaml,json}]
+indent_size = 2
