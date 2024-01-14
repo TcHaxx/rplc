@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" ClassName="CNestedPlcProjDef" TcProjectVariant="DEMO">
-	<Project GUID="{992DEA41-1FF5-4E73-9E54-D40AA62F82C0}" Name="RpcClient" PrjFilePath="..\..\..\examples\RpcClient\RpcClient.plcproj" TmcFilePath="..\..\..\examples\RpcClient\RpcClient.tmc" ReloadTmc="true" AmsPort="853" FileArchiveSettings="#x000e" SymbolicMapping="true">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" ClassName="CNestedPlcProjDef" TcProjectVariant="LIB">
+	<Project Disabled="true" GUID="{992DEA41-1FF5-4E73-9E54-D40AA62F82C0}" Name="RpcClient" PrjFilePath="..\..\..\examples\RpcClient\RpcClient.plcproj" TmcFilePath="..\..\..\examples\RpcClient\RpcClient.tmc" ReloadTmc="true" AmsPort="853" FileArchiveSettings="#x000e" SymbolicMapping="true">
 		<ProjectVariant PvUseDisable="true" PvUseDefine="true">
 			<Variant>
 				<Name>DEMO</Name>
 				<Disable>0</Disable>
-				<Defines></Defines>
+				<Defines/>
 			</Variant>
 			<Variant>
 				<Name>LIB</Name>
