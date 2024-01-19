@@ -1,3 +1,4 @@
+[![CI/CD](https://github.com/TcHaxx/rplc/actions/workflows/cicd.yml/badge.svg?branch=main)](https://github.com/TcHaxx/rplc/actions/workflows/cicd.yml)
 # rplc
 Invoke `RPC` methods from `TwinCAT PLC` using `ADS`.
 
