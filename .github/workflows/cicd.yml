@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 on:
   push:
     branches:
@@ -26,9 +26,28 @@ jobs:
             username: ${{ secrets.ACTIONS_ZGWK_USERNAME }}
             password: ${{ secrets.ACTIONS_ZGWK_PASSWORD }}
       - name: Upload *.library
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
             name: rplc
             path: |
               **/*.compiled-library
               **/*.library
+
+  cd:
+    name: CD
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v4
+        id: download-rplc
+        with:
+          name: rplc
+      
+      - uses: Zeugwerk/twinpack-action@v0.4.0
+        with:
+          username: ${{ secrets.ACTIONS_ZGWK_USERNAME }}
+          password: ${{ secrets.ACTIONS_ZGWK_PASSWORD }}  
+          path: ${{ steps.download-rplc.outputs.download-path}}
