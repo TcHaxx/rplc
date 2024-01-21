@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="FB_RPC_Tests" Id="{cbe11911-4728-435a-ba6b-73a9e68e4ee2}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'reflection'}
-FUNCTION_BLOCK FINAL FB_RPC_Tests EXTENDS TcUnit.FB_TestSuite
+FUNCTION_BLOCK INTERNAL FINAL FB_RPC_Tests EXTENDS TcUnit.FB_TestSuite
 VAR
 	{attribute 'instance-path'} 
     {attribute 'noinit'} 

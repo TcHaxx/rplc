@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="F_IncrementStep" Id="{701464ed-4ab7-4ccb-a3fd-1cc65c5b3c94}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION F_IncrementStep
+    <Declaration><![CDATA[FUNCTION INTERNAL F_IncrementStep
 VAR_IN_OUT
 	nStepToInc : INT; 
 END_VAR

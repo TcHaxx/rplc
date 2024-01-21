@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="PRG_UnitTests" Id="{e25ec562-542b-45d4-af41-3a64fbc21fb4}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'analysis' := '-33'}
-PROGRAM PRG_UnitTests
+PROGRAM INTERNAL PRG_UnitTests
 
 VAR
 {IF defined (UNIT_TEST)}	

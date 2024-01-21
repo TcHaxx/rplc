@@ -19,7 +19,7 @@
     <Company>tchaxx</Company>
     <Released>false</Released>
     <Title>rplc</Title>
-    <ProjectVersion>0.2.2.0</ProjectVersion>
+    <ProjectVersion>0.2.3.0</ProjectVersion>
     <Author>densogiaichned</Author>
     <Description>Invoke RPC methods.</Description>
     <CompilerDefines />
@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="TESTs\Helper\E_Mode.TcDUT">
       <SubType>Code</SubType>
+      <CompilerDefines>UNIT_TEST</CompilerDefines>
     </Compile>
     <Compile Include="TESTs\Helper\F_IncrementStep.TcPOU">
       <SubType>Code</SubType>
