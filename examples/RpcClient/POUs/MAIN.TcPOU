@@ -19,12 +19,14 @@ stRetVal := fbRpc.VarInput(sArg)
                  .VarOutput(nLen)
                  .VarInOut(stLibVersion)
                  .ReturnValue(sRetVal)
-                 .Invoke();]]></ST>
+                 .Invoke();
+				 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="37" Count="0" />
       <LineId Id="33" Count="3" />
       <LineId Id="2" Count="0" />
+      <LineId Id="49" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

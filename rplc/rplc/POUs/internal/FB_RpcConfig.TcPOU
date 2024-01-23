@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_RpcConfig" Id="{0ece8654-785d-4f03-8887-a8736c00785e}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'do not call this POU directly'}
+{attribute 'conditionalshow_all_locals'}
+FUNCTION_BLOCK INTERNAL FINAL FB_RpcConfig IMPLEMENTS I_RpcDynamicConfigAmsNetId, I_RpcDynamicConfigAmsPort, I_RpcDynamicConfigSymbolPath, I_RpcDynamicConfigBuild
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR	
+	sAmsNetIdLocalField		: T_AmsNetId;
+	nAmsPortLocalField		: T_AmsPort;
+	sInstancePathLocalField	: STRING;
+	sSymbolLocalField		: STRING;
+	pFbRpcBase				: POINTER TO FB_RpcBase;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="ITFs" Id="{bb2aed01-6a79-4ef6-b50d-acc2f5488200}" />
+    <Method Name="Build" Id="{b68bc296-e290-4099-b447-5264915e1e6a}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD Build : HRESULT]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF pFbRpcBase = NULL THEN
+	Build := E_HRESULTAdsErr.INVALIDINTERFACE;
+	RETURN;
+END_IF
+Build := pFbRpcBase^.ConfigDoneCallBack(sAmsNetId:= sAmsNetIdLocalField, nAmsPort:= nAmsPortLocalField, sInstancePath:= sInstancePathLocalField, sSymbol:= sSymbolLocalField);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetCallback" Id="{ea8a6ec3-f23f-411d-8f63-3d4035460924}">
+      <Declaration><![CDATA[METHOD INTERNAL SetCallback
+VAR_INPUT
+	pFbRpcBase : POINTER TO FB_RpcBase;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.pFbRpcBase := pFbRpcBase;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithAmsNetId" Id="{b82ba08f-7e00-440a-8f8e-76f93109c9d8}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD WithAmsNetId : I_RpcDynamicConfigAmsPort
+VAR_INPUT
+	sAmsNetId	: Tc2_System.T_AmsNetID;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.sAmsNetIdLocalField := sAmsNetId;
+
+WithAmsNetId := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithAmsPort" Id="{24232020-6a85-4d8d-9bce-84f9c8bbcda5}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD WithAmsPort : I_RpcDynamicConfigSymbolPath
+VAR_INPUT
+	nAmsPort	: Tc2_System.T_AmsPort;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.nAmsPortLocalField := nAmsPort;
+
+WithAmsPort := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WithSymbolPath" Id="{6d75d2e7-e55a-4750-9698-dde9afeecb9e}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD WithSymbolPath : I_RpcDynamicConfigBuild
+VAR_INPUT
+	sInstancePath	: STRING;
+	sSymbol	: STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.sInstancePathLocalField := sInstancePath;
+THIS^.sSymbolLocalField := sSymbol;
+
+WithSymbolPath := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_RpcConfig">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcConfig.Build">
+      <LineId Id="5" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="30" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcConfig.SetCallback">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcConfig.WithAmsNetId">
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcConfig.WithAmsPort">
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcConfig.WithSymbolPath">
+      <LineId Id="8" Count="1" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

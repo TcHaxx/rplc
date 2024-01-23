@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_RpcDynamicConfigAmsPort" Id="{75145a11-3559-438b-aa54-2b1ad70c400b}">
+    <Declaration><![CDATA[INTERFACE I_RpcDynamicConfigAmsPort
+]]></Declaration>
+    <Method Name="WithAmsPort" Id="{c0d46c0a-576a-4726-9736-677358b08960}">
+      <Declaration><![CDATA[METHOD WithAmsPort : I_RpcDynamicConfigSymbolPath
+VAR_INPUT
+	nAmsPort	: T_AmsPort;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

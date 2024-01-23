@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_RpcDynamicConfigAmsNetId" Id="{adfddc74-34fd-459e-bf15-06f40b585475}">
+    <Declaration><![CDATA[INTERFACE I_RpcDynamicConfigAmsNetId
+]]></Declaration>
+    <Method Name="WithAmsNetId" Id="{035089dd-f095-4a6e-8c35-e63df558f6bb}">
+      <Declaration><![CDATA[METHOD WithAmsNetId : I_RpcDynamicConfigAmsPort
+VAR_INPUT
+	sAmsNetId	: T_AmsNetID;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

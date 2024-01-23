@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_RPC_Dynamic" Id="{8d147792-0928-41d9-a8ad-6feec4d91f92}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'do not call this POU directly'}
+{attribute 'conditionalshow_all_locals'}
+// Function Block to invoke RPC calls.
+FUNCTION_BLOCK FINAL FB_RPC_Dynamic EXTENDS FB_RpcBase IMPLEMENTS I_RpcDynamicConfig
+
+VAR
+	{attribute 'hide'}	
+	fbConfig				: FB_RpcConfig;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="ITFs" Id="{69f227c9-1e01-43cd-84f0-b192164f0d10}" />
+    <Method Name="ConfigDoneCallBack" Id="{fbb623cb-6666-478b-ad57-726ac340c777}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD INTERNAL ConfigDoneCallback : HRESULT
+VAR_INPUT CONSTANT
+	sAmsNetId		: REFERENCE TO T_AmsNetId;
+	nAmsPort		: T_AmsPort;
+	sInstancePath	: REFERENCE TO STRING;
+	sSymbol			: REFERENCE TO STRING;
+END_VAR
+VAR
+	sRpcSymbol : T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF sAmsNetId = '' THEN
+	ConfigDoneCallback := E_HRESULTAdsErr.INVALIDPARM;
+	RETURN;
+END_IF
+
+IF nAmsPort = 0 THEN
+	ConfigDoneCallback := E_HRESULTAdsErr.INVALIDPARM;
+	RETURN;
+END_IF
+
+IF sInstancePath = '' THEN
+	ConfigDoneCallback := E_HRESULTAdsErr.INVALIDPARM;
+	RETURN;
+END_IF
+
+IF sSymbol = '' THEN
+	ConfigDoneCallback := E_HRESULTAdsErr.INVALIDPARM;
+	RETURN;
+END_IF
+
+IF sAmsNetId <> SUPER^.sAmsNetId THEN
+	SUPER^.ReleaseHandle();
+	SUPER^.sAmsNetId := sAmsNetId;	
+END_IF
+
+IF nAmsPort <> SUPER^.nAmsPort THEN
+	SUPER^.ReleaseHandle();
+	SUPER^.nAmsPort := nAmsPort;	
+END_IF
+
+sRpcSymbol := F_RpcSymbol(sInstancePath:= sInstancePath, sSymbolName:= sSymbol);
+IF sRpcSymbol <> SUPER^.sRpcSymbolField THEN
+	SUPER^.ReleaseHandle();
+	SUPER^.sRpcSymbol := sRpcSymbol;
+END_IF;
+
+ConfigDoneCallback := S_OK;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Configure" Id="{c9c670fa-9394-4404-a82d-1b6ab703eecb}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD Configure : I_RpcDynamicConfigAmsNetId
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbConfig.SetCallback(pFbRpcBase:= THIS);
+Configure := fbConfig;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_exit" Id="{3877c5a4-13ea-4a21-9447-b91548b15388}">
+      <Declaration><![CDATA[METHOD FB_exit : BOOL
+VAR_INPUT
+	bInCopyCode : BOOL; // if TRUE, the exit method is called for exiting an instance that is copied afterwards (online change).
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF SUPER^.nSymbolHandle > cNoSymbolNameHandle THEN
+	SUPER^.ReleaseHandle();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_RPC_Dynamic">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Dynamic.ConfigDoneCallBack">
+      <LineId Id="6" Count="35" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Dynamic.Configure">
+      <LineId Id="5" Count="0" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RPC_Dynamic.FB_exit">
+      <LineId Id="11" Count="1" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

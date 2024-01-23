@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_RpcDynamicConfig" Id="{b9fd8480-d60f-4137-8936-4a5090e7d3c6}">
+    <Declaration><![CDATA[INTERFACE I_RpcDynamicConfig
+]]></Declaration>
+    <Method Name="Configure" Id="{dbe0cce7-d007-4a9b-87a6-e73fa0e27874}">
+      <Declaration><![CDATA[METHOD Configure : I_RpcDynamicConfigAmsNetId
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -19,7 +19,7 @@
     <Company>tchaxx</Company>
     <Released>false</Released>
     <Title>rplc</Title>
-    <ProjectVersion>0.2.3.0</ProjectVersion>
+    <ProjectVersion>0.2.3.1</ProjectVersion>
     <Author>densogiaichned</Author>
     <Description>Invoke RPC methods.</Description>
     <CompilerDefines />
@@ -56,6 +56,21 @@
     <Compile Include="ITFs\I_RpcArguments.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ITFs\I_RpcDynamicConfigAmsNetId.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ITFs\I_RpcDynamicConfigAmsPort.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ITFs\I_RpcDynamicConfigSymbolPath.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ITFs\I_RpcDynamicConfig.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ITFs\I_RpcDynamicConfigBuild.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ITFs\I_RpcInvoke.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -65,16 +80,25 @@
     <Compile Include="PlcTaskUnitTest.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_ArgumentsBuffer.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\FB_RPC.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\F_RpcSymbol.TcPOU">
+    <Compile Include="POUs\FB_RPC_Dynamic.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_ToAnyType.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\internal\FB_ArgumentsBuffer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\internal\FB_RpcConfig.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\internal\FB_RpcBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\internal\F_RpcSymbol.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TESTs\FB_F_RpcSymbol_Tests.TcPOU">
@@ -84,6 +108,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TESTs\FB_RPC_Tests.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TESTs\FB_RPC_Dynamic_Tests.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TESTs\Helper\E_Mode.TcDUT">
@@ -102,6 +129,7 @@
     <Folder Include="GVLs" />
     <Folder Include="ITFs" />
     <Folder Include="EXAMPLEs" />
+    <Folder Include="POUs\internal" />
     <Folder Include="TESTs" />
     <Folder Include="TESTs\Helper" />
     <Folder Include="VISUs" />

@@ -8,6 +8,7 @@ VAR
 {IF defined (UNIT_TEST)}	
 	fbF_RpcSymbolTests		: FB_F_RpcSymbol_Tests;
 	fbRpcTests				: FB_RPC_Tests;
+	fbRpcDynamicTests		: FB_RPC_Dynamic_Tests;
 	fbF_ToAnyTypeTests		: FB_F_ToAnyType_Tests;
 {END_IF}
 END_VAR
@@ -15,16 +16,11 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[{IF defined (UNIT_TEST)}
-
 TcUnit.RUN();
-
 {END_IF}]]></ST>
     </Implementation>
     <LineIds Name="PRG_UnitTests">
-      <LineId Id="9" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="16" Count="0" />
+      <LineId Id="9" Count="1" />
       <LineId Id="14" Count="0" />
     </LineIds>
   </POU>

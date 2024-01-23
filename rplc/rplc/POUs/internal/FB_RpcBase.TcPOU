@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_RpcBase" Id="{60bb6e01-c8a6-41d2-a5ca-441387fe7fec}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'do not call this POU directly'}
+{attribute 'conditionalshow_all_locals'}
+FUNCTION_BLOCK INTERNAL ABSTRACT FB_RpcBase IMPLEMENTS I_RpcArguments, I_RpcInvoke, I_RpcReleaseHandle, __System.IQueryInterface
+VAR
+	sAmsNetIdField 			: T_AmsNetId 	:= GCL.cLocalAmsNetId;
+	nAmsPortField			: T_AmsPort		:= 851;
+	nSymbolHandle 			: UDINT;
+	sRpcSymbolField			: T_MaxString	:= 'MAIN.NotInitialized#yet';
+END_VAR
+VAR
+	fbRdWrReq 				: ADSRDWRT;
+	fbAdsWrReqRelHandle 	: ADSWRITE; 
+	nHandleToRelease		: UDINT := cNoSymbolNameHandle;	
+	eStep					: ( HNDBYNAME, VALBYHND, RELEASEHND) := HNDBYNAME;
+	eArgs					: ( NO_LOCK, LOCK ) := NO_LOCK;
+	fbArguments				: FB_ArgumentsBuffer;
+	tAdsTimeOutField		: TIME := GCL.cAdsTimeOut;
+END_VAR
+
+VAR CONSTANT
+	cNoSymbolNameHandle : UDINT := 0;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="ITFs" Id="{9d3ea750-03e0-40f7-b2c7-e09eef01ef38}" />
+    <Method Name="ConfigDoneCallback" Id="{6ac5d287-5feb-44e7-9885-267f9962622a}">
+      <Declaration><![CDATA[METHOD INTERNAL ABSTRACT ConfigDoneCallback : HRESULT
+VAR_INPUT CONSTANT
+	sAmsNetId		: REFERENCE TO T_AmsNetId;
+	nAmsPort		: T_AmsPort;
+	sInstancePath	: REFERENCE TO STRING;
+	sSymbol			: REFERENCE TO STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetSymbolHandleByName" Id="{b8a3e7e5-cf5c-4a74-9038-b696fd4a4c96}">
+      <Declaration><![CDATA[METHOD PRIVATE GetSymbolHandleByName : ST_AdsStatus
+VAR_INPUT
+	sNetId 		: REFERENCE TO T_AmsNetId;
+	nPort		: T_AmsPort;
+	sSymbol		: REFERENCE TO T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbRdWrReq(
+	NETID:= sNetId, 
+	PORT:= nPort, 
+	IDXGRP:= ADSIGRP_SYM_HNDBYNAME, 
+	IDXOFFS:= 16#0, 
+	WRITELEN:= TO_UDINT(LEN(sSymbol)), 
+	READLEN:= SIZEOF(nSymbolHandle), 
+	SRCADDR:= ADR(sSymbol), 
+	DESTADDR:= ADR(nSymbolHandle), 
+	WRTRD:= TRUE, 
+	TMOUT:= tAdsTimeOutField, 
+	BUSY=> GetSymbolHandleByName.bBusy, 
+	ERR=> GetSymbolHandleByName.bError, 
+	ERRID=> GetSymbolHandleByName.nError);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Invoke" Id="{a5ff28e0-5e8a-49d9-b0a1-f0c330d9c49e}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD Invoke : ST_AdsStatus
+
+VAR
+	stRetVal : ST_AdsStatus;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[eArgs := LOCK;
+
+CASE eStep OF
+	HNDBYNAME:
+		Invoke.bBusy := TRUE;
+		stRetVal := GetSymbolHandleByName(sAmsNetIdField, nAmsPortField, sRpcSymbolField);
+		IF NOT stRetVal.bBusy AND NOT stRetVal.bError THEN
+			fbRdWrReq(WRTRD:= FALSE);
+			eStep:= VALBYHND;
+		ELSE
+			Invoke := stRetVal;
+			eStep := HNDBYNAME;
+			RETURN;
+		END_IF
+		
+	VALBYHND:
+		Invoke := ReadValueByHandle(fbArguments.pArgsBuffer,
+									fbArguments.nArgsLength, 
+									fbArguments.pRetValBuffer, 
+									fbArguments.nRetValLength);		
+		IF NOT Invoke.bBusy THEN
+			eArgs := NO_LOCK;
+			IF NOT Invoke.bError THEN
+				Invoke.nError := fbArguments.GetRetVal();
+				Invoke.bError := Invoke.nError <> E_AdsErr.NOERR;
+			END_IF;
+			fbRdWrReq(WRTRD:= FALSE);
+			ResetArguments();
+			IF Invoke.bError AND Invoke.nError = E_AdsErr.DEVICE_NOTIFYHNDINVALID THEN
+				Invoke.bBusy := TRUE;
+				Invoke.bError := FALSE;
+				Invoke.nError := E_AdsErr.NOERR;
+				eStep := HNDBYNAME;
+			END_IF
+		END_IF
+END_CASE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="nAmsPort" Id="{9711f815-346e-43a5-8ba5-1fdcc6ac3133}">
+      <Declaration><![CDATA[PROPERTY PROTECTED nAmsPort : Tc2_System.T_AmsPort
+]]></Declaration>
+      <Get Name="Get" Id="{c8d1e35a-9563-4f03-9f45-19b282e0d2b5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nAmsPort := nAmsPortField;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{637d44f3-84cd-46cf-8737-00b362b8b673}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nAmsPortField := nAmsPort;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="NoReturnValue" Id="{474e8543-a49c-411c-ba1d-84d2782077d4}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD NoReturnValue : I_RpcInvoke
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[NoReturnValue := THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReadValueByHandle" Id="{760ca3bf-e92b-4b9b-817f-d7f9248a6b86}">
+      <Declaration><![CDATA[METHOD PRIVATE ReadValueByHandle : ST_AdsStatus
+VAR_INPUT
+	pArgs		: PVOID;
+	nLenArgs 	: UDINT;
+	pRetVal		: PVOID;
+	nLenRetVal 	: UDINT;
+END_VAR
+
+VAR
+	nNullDummy 	: UDINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF pArgs = NULL THEN
+	pArgs := ADR(nNullDummy);
+	nLenArgs := 0;
+END_IF
+	
+IF pRetVal = NULL THEN
+	pRetVal := ADR(nNullDummy);
+	nLenRetVal := 0;
+END_IF
+
+fbRdWrReq(
+		IDXGRP:= ADSIGRP_SYM_VALBYHND, 
+		IDXOFFS:= nSymbolHandle, 
+		WRITELEN:=nLenArgs, 
+		READLEN:= nLenRetVal , 
+		SRCADDR:= pArgs, 
+		DESTADDR:= pRetVal, 
+		WRTRD:= TRUE, 
+		TMOUT:= tAdsTimeOutField, 
+		BUSY=> ReadValueByHandle.bBusy, 
+		ERR=> ReadValueByHandle.bError, 
+		ERRID=> ReadValueByHandle.nError);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReleaseHandle" Id="{a1cb110e-e7fc-4b9e-9973-63246db90672}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD ReleaseHandle : ST_AdsStatus
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF THIS^.nSymbolHandle = cNoSymbolNameHandle THEN
+	RETURN;
+END_IF
+
+IF nHandleToRelease = cNoSymbolNameHandle THEN
+	fbAdsWrReqRelHandle(WRITE:= FALSE);
+	nHandleToRelease := THIS^.nSymbolHandle;
+END_IF
+
+fbAdsWrReqRelHandle(
+	NETID:= THIS^.sAmsNetIdField, 
+	PORT:= THIS^.nAmsPortField, 
+	IDXGRP:= ADSIGRP_SYM_RELEASEHND, 
+	IDXOFFS:= 16#0, 
+	LEN:= SIZEOF(nHandleToRelease), 
+	SRCADDR:= ADR(nHandleToRelease), 
+	WRITE:= TRUE, 
+	TMOUT:= tAdsTimeOutField, 
+	BUSY=> ReleaseHandle.bBusy, 
+	ERR=> ReleaseHandle.bError, 
+	ERRID=> ReleaseHandle.nError);
+	
+IF NOT fbAdsWrReqRelHandle.BUSY OR fbAdsWrReqRelHandle.ERR THEN
+	eStep := HNDBYNAME;
+	nHandleToRelease := cNoSymbolNameHandle;	
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{6134552b-3f49-4e49-bcfa-feeb685ec6b1}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ResetArguments();
+ReleaseHandle();
+nHandleToRelease := cNoSymbolNameHandle;
+fbAdsWrReqRelHandle(WRITE:= FALSE);
+fbRdWrReq(WRTRD:= FALSE);
+eArgs := NO_LOCK;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ResetArguments" Id="{ddc3e055-8582-4f90-a419-ccbd4b64d027}">
+      <Declaration><![CDATA[METHOD PRIVATE ResetArguments
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbArguments.Reset();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReturnValue" Id="{442780dd-d5a5-459e-ab13-1bd79541785e}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD ReturnValue : I_RpcInvoke
+VAR_INPUT
+	anyRetVal	: ANY;
+END_VAR
+VAR
+	stAny : ST_AnyType;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ReturnValue := THIS^;
+
+IF eArgs = LOCK THEN
+	RETURN;
+END_IF
+
+IF anyRetVal.diSize <= 0 THEN
+	RETURN;
+END_IF
+
+stAny := F_ToAnyType(anyRetVal);
+
+fbArguments.SetRetVal(stAny);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="sAmsNetId" Id="{668869ea-fb52-4d03-b5f4-d57f3a5583a7}">
+      <Declaration><![CDATA[PROPERTY PROTECTED sAmsNetId : Tc2_System.T_AmsNetID
+]]></Declaration>
+      <Get Name="Get" Id="{9a71f7f3-f523-4d6f-82e3-e2a4b12ee244}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[sAmsNetId := sAmsNetIdField;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{17c22dc4-ff31-4f84-b5d0-2c1c769af3f7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[sAmsNetIdField := sAmsNetId;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="sRpcSymbol" Id="{30317d63-72b5-4d99-8f88-7bf10cd9c585}">
+      <Declaration><![CDATA[PROPERTY PROTECTED sRpcSymbol : T_MaxString]]></Declaration>
+      <Get Name="Get" Id="{c75f8692-63ed-4cfc-a0d5-4d00fdc1cfa3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[sRpcSymbol := THIS^.sRpcSymbolField;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{b1b5226c-f7d2-4dbe-925c-d13a91cdc3b8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF sRpcSymbol <> '' THEN
+	sRpcSymbolField := sRpcSymbol;
+END_IF ]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="tAdsTimeOut" Id="{ab711797-88bd-4976-ab5a-b05750afb586}">
+      <Declaration><![CDATA[PROPERTY tAdsTimeOut : TIME]]></Declaration>
+      <Get Name="Get" Id="{d1c33412-a6dc-4123-a09c-a3c20614ed14}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[tAdsTimeOut := tAdsTimeOutField;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{a73f1060-b87e-4fca-9592-045718ff207c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF tAdsTimeout > T#0MS THEN
+	tAdsTimeOutField := tAdsTimeOut;
+END_IF]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="VarInOut" Id="{b9f3e71c-8631-401d-bc39-4e95d1f34928}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD VarInOut : I_RpcArguments
+VAR_INPUT
+	anyArg	: ANY;
+END_VAR
+
+VAR
+	stAny : ST_AnyType;
+	eAdsErr : E_AdsErr;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[VarInOut := THIS^;
+
+IF eArgs = LOCK THEN
+	RETURN;
+END_IF
+
+IF anyArg.diSize <= 0 THEN
+	RETURN;
+END_IF
+
+stAny := F_ToAnyType(anyArg);
+
+eAdsErr := fbArguments.SetVarInOut(stAny);
+IF eAdsErr <> E_AdsErr.NOERR THEN
+	RETURN;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="VarInput" Id="{3574a265-afcc-4b91-a9af-a3242e5d3ce1}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD VarInput : I_RpcArguments
+VAR_INPUT
+	anyArg	: ANY;
+END_VAR
+VAR
+	stAny : ST_AnyType;
+	eAdsErr : E_AdsErr;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[VarInput := THIS^;
+
+IF eArgs = LOCK THEN
+	RETURN;
+END_IF
+
+stAny := F_ToAnyType(anyArg);
+
+eAdsErr := fbArguments.SetVarInput(stAny);
+IF eAdsErr <> E_AdsErr.NOERR THEN
+	RETURN;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="VarOutput" Id="{57d9448f-4448-47c8-bcf1-8cd990b4dc6c}" FolderPath="ITFs\">
+      <Declaration><![CDATA[METHOD VarOutput : I_RpcArguments
+VAR_INPUT
+	anyArg	: ANY;
+END_VAR
+VAR
+	stAny : ST_AnyType;
+	eAdsErr : E_AdsErr;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[VarOutput := THIS^;
+
+IF eArgs = LOCK THEN
+	RETURN;
+END_IF
+
+stAny := F_ToAnyType(anyArg);
+
+eAdsErr := fbArguments.SetVarOutput(stAny);
+IF eAdsErr <> E_AdsErr.NOERR THEN
+	RETURN;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_RpcBase">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.ConfigDoneCallback">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.GetSymbolHandleByName">
+      <LineId Id="33" Count="12" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.Invoke">
+      <LineId Id="8" Count="34" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.nAmsPort.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.nAmsPort.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.NoReturnValue">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.ReadValueByHandle">
+      <LineId Id="10" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="34" Count="2" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="12" Count="7" />
+      <LineId Id="37" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.ReleaseHandle">
+      <LineId Id="5" Count="24" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.Reset">
+      <LineId Id="6" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="7" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.ResetArguments">
+      <LineId Id="8" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.ReturnValue">
+      <LineId Id="19" Count="9" />
+      <LineId Id="30" Count="2" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.sAmsNetId.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.sAmsNetId.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.sRpcSymbol.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.sRpcSymbol.Set">
+      <LineId Id="5" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.tAdsTimeOut.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.tAdsTimeOut.Set">
+      <LineId Id="5" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.VarInOut">
+      <LineId Id="26" Count="9" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="39" Count="2" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.VarInput">
+      <LineId Id="22" Count="6" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="31" Count="2" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RpcBase.VarOutput">
+      <LineId Id="22" Count="5" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="31" Count="2" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

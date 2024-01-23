@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_RpcDynamicConfigBuild" Id="{d14865a4-cf7b-43ff-9162-516200461cd5}">
+    <Declaration><![CDATA[INTERFACE I_RpcDynamicConfigBuild
+]]></Declaration>
+    <Method Name="Build" Id="{3eefaa5b-d67b-489f-9887-46326278cddd}">
+      <Declaration><![CDATA[METHOD Build : HRESULT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

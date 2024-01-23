@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_RpcDynamicConfigSymbolPath" Id="{0f49c276-c433-4aa2-bc4f-ba5c9f81750f}">
+    <Declaration><![CDATA[INTERFACE I_RpcDynamicConfigSymbolPath
+]]></Declaration>
+    <Method Name="WithSymbolPath" Id="{babbc73f-92e7-42f8-b227-ebee44a0b03b}">
+      <Declaration><![CDATA[METHOD WithSymbolPath : I_RpcDynamicConfigBuild
+VAR_INPUT
+	sInstancePath	: STRING;
+	sSymbol			: STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
