@@ -7,7 +7,19 @@ Project("{B1E792BE-AA5F-4E3C-8C82-674BF9C0715B}") = "rplc", "rplc\rplc.tsproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "env", "env", "{003D764A-108E-4025-A2EF-50557C2DB87C}"
 	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{2F2FE90F-FFCA-423C-99BE-A4DEF945082D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{36BBC2E8-4640-4D4B-9F60-CB88ACBA771D}"
+	ProjectSection(SolutionItems) = preProject
 		.github\workflows\cicd.yml = .github\workflows\cicd.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Zeugwerk", ".Zeugwerk", "{F876EBAC-D465-401E-B3EF-BF542BC7C265}"
+	ProjectSection(SolutionItems) = preProject
+		.Zeugwerk\config.json = .Zeugwerk\config.json
 	EndProjectSection
 EndProject
 Global
@@ -87,6 +99,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2F2FE90F-FFCA-423C-99BE-A4DEF945082D} = {003D764A-108E-4025-A2EF-50557C2DB87C}
+		{36BBC2E8-4640-4D4B-9F60-CB88ACBA771D} = {2F2FE90F-FFCA-423C-99BE-A4DEF945082D}
+		{F876EBAC-D465-401E-B3EF-BF542BC7C265} = {003D764A-108E-4025-A2EF-50557C2DB87C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {422E2AF6-041F-4031-9FCC-95E8497E746F}

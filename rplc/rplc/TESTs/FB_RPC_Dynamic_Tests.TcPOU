@@ -29,66 +29,66 @@ END_VAR
 		TEST(sActiveStep);
 		eMode := ShouldInvokeMethod_NoArguments_NoReturnValue_Successfully();
 		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);
-//	2:
-//		sActiveStep := 'ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);
-//	3:	
-//		sActiveStep := 'ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
-//	4:	
-//		sActiveStep := 'ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
-//	5:	
-//		sActiveStep := 'ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);
-//	6:	
-//		sActiveStep := 'ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);		
-//	7:	
-//		sActiveStep := 'ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
-//	8:	
-//		sActiveStep := 'ShouldInvokeMethod_VarOutput_ReturnValue_Successfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldInvokeMethod_VarOutput_ReturnValue_Successfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
-//	9:	
-//		sActiveStep := 'ShouldInvokeMethod_TwoVarOutput_ReturnValue_Successfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldInvokeMethod_TwoVarOutput_ReturnValue_Successfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
-//	10:	
-//		sActiveStep := 'ShouldInvokeMethod_VarInput_VarInOut_VarOutput_ReturnValue_Successfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldInvokeMethod_VarInput_VarInOut_VarOutput_ReturnValue_Successfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);		
-//	11: 
-//		sActiveStep := 'ShouldReturnError0x705';
-//		TEST(sActiveStep);
-//		eMode := ShouldReturnError0x705();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
-//	12: 
-//		sActiveStep := 'ShouldReturnError0x710';
-//		TEST(sActiveStep);
-//		eMode := ShouldReturnError0x710();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
-//	13: 
-//		sActiveStep := 'ShouldReleaseAllSymbolHandleSuccessfully';
-//		TEST(sActiveStep);
-//		eMode := ShouldReleaseAllSymbolHandleSuccessfully();
-//		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	2:
+		sActiveStep := 'ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);
+	3:	
+		sActiveStep := 'ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	4:	
+		sActiveStep := 'ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	5:	
+		sActiveStep := 'ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);
+	6:	
+		sActiveStep := 'ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);		
+	7:	
+		sActiveStep := 'ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	8:	
+		sActiveStep := 'ShouldInvokeMethod_VarOutput_ReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_VarOutput_ReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	9:	
+		sActiveStep := 'ShouldInvokeMethod_TwoVarOutput_ReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_TwoVarOutput_ReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	10:	
+		sActiveStep := 'ShouldInvokeMethod_VarInput_VarInOut_VarOutput_ReturnValue_Successfully';
+		TEST(sActiveStep);
+		eMode := ShouldInvokeMethod_VarInput_VarInOut_VarOutput_ReturnValue_Successfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);		
+	11: 
+		sActiveStep := 'ShouldReturnError0x705';
+		TEST(sActiveStep);
+		eMode := ShouldReturnError0x705();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	12: 
+		sActiveStep := 'ShouldReturnError0x710';
+		TEST(sActiveStep);
+		eMode := ShouldReturnError0x710();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
+	13: 
+		sActiveStep := 'ShouldReleaseAllSymbolHandleSuccessfully';
+		TEST(sActiveStep);
+		eMode := ShouldReleaseAllSymbolHandleSuccessfully();
+		F_IncrementStep(nStepToInc:= nSequence, sActiveStep, eMode);	
 	ELSE
 		TEST_FINISHED_NAMED(sTestName);
 END_CASE
@@ -195,7 +195,7 @@ ShouldInvokeMethod_NoArguments_NoReturnValue_Successfully := eMode;]]></ST>
       <Declaration><![CDATA[METHOD ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'NoParameter_ReturnValue');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -206,7 +206,12 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Arrange
 Register(fbSUT);
-
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','NoParameter_ReturnValue')
+	.Build();
+	
 // Act
 stRetVal := fbSUT.ReturnValue(bActual).Invoke();
 
@@ -226,7 +231,7 @@ ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully := eMode;]]></ST>
       <Declaration><![CDATA[METHOD ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'OneParameter_NoReturnValue');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -237,6 +242,12 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Arrange
 Register(fbSUT);
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','OneParameter_NoReturnValue')
+	.Build();
+
 nArg := 123;
 
 // Act
@@ -258,7 +269,7 @@ ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully := eMode;]]></ST>
       <Declaration><![CDATA[METHOD ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'ThreeParameters_ReturnValue');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -272,6 +283,12 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Arrange
 Register(fbSUT);
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','ThreeParameters_ReturnValue')
+	.Build();
+
 nArg1 := 456;
 stArg2.bBusy := FALSE;
 stArg2.bError := TRUE;
@@ -301,7 +318,7 @@ ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully := eMode;]]></ST>
       <Declaration><![CDATA[METHOD ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'TwoParameters_ReturnValue');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -314,6 +331,12 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Arrange
 Register(fbSUT);
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','TwoParameters_ReturnValue')
+	.Build();
+	
 nArg1 := 456;
 sArg2 := 'second Argument';
 
@@ -337,7 +360,7 @@ ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully := eMode;]]></ST>
       <Declaration><![CDATA[METHOD ShouldInvokeMethod_TwoVarOutput_ReturnValue_Successfully : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'TwoVarOutput_ReturnValue');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -350,7 +373,12 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Arrange
 Register(fbSUT);
-
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','TwoVarOutput_ReturnValue')
+	.Build();
+	
 // Act
 stRetVal := fbSUT.VarOutput(stArg).VarOutput(nA).ReturnValue(nActualRetVal).Invoke();
 
@@ -374,7 +402,7 @@ ShouldInvokeMethod_TwoVarOutput_ReturnValue_Successfully := eMode;]]></ST>
       <Declaration><![CDATA[METHOD ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'VarInOutConstant_ReturnValue');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -386,6 +414,12 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Arrange
 Register(fbSUT);
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','VarInOutConstant_ReturnValue')
+	.Build();
+	
 stArg.nFlags := 987;
 
 // Act
@@ -408,7 +442,7 @@ ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully := eMode;]]></ST>
       <Declaration><![CDATA[METHOD ShouldInvokeMethod_VarInput_VarInOut_VarOutput_ReturnValue_Successfully : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'VarInput_VarInOut_VarOutput_ReturnValue');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -425,7 +459,12 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Arrange
 Register(fbSUT);
-
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','VarInput_VarInOut_VarOutput_ReturnValue')
+	.Build();
+	
 sStrIn	:= 'Input String';
 nIn		:= -666;
 nInOut	:= 777;
@@ -455,7 +494,7 @@ ShouldInvokeMethod_VarInput_VarInOut_VarOutput_ReturnValue_Successfully := eMode
       <Declaration><![CDATA[METHOD ShouldInvokeMethod_VarOutput_ReturnValue_Successfully : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'VarOutput_ReturnValue');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -467,7 +506,11 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Arrange
 Register(fbSUT);
-
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','VarOutput_ReturnValue')
+	.Build();
 
 // Act
 stRetVal := fbSUT.VarOutput(stArg).ReturnValue(nActualRetVal).Invoke();
@@ -524,7 +567,7 @@ ShouldReleaseAllSymbolHandleSuccessfully := E_Mode.BUSY;]]></ST>
       <Declaration><![CDATA[METHOD ShouldReturnError0x705 : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'NoParameter_NoReturnValue');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -533,7 +576,14 @@ VAR
 	nDummy		: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// Act
+        <ST><![CDATA[//Arrange
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','NoParameter_NoReturnValue')
+	.Build();
+
+// Act
 stRetVal := fbSUT.VarInput(nDummy).NoReturnValue().Invoke();
 
 IF NOT stRetVal.bBusy THEN
@@ -552,7 +602,7 @@ ShouldReturnError0x705 := eMode;]]></ST>
       <Declaration><![CDATA[METHOD ShouldReturnError0x710 : E_Mode
 
 VAR_INST
-	fbSUT		: FB_RPC(GCL.cLocalAmsNetId, _AppInfo.AdsPort, 'PRG_UnitTests.fbRpcTests', 'NotExistingSymbol');
+	fbSUT		: FB_RPC_Dynamic;
 END_VAR
 
 VAR
@@ -561,7 +611,14 @@ VAR
 	nDummy		: INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// Act
+        <ST><![CDATA[// Arrange
+fbSUT.Configure()
+	.WithAmsNetId(GCL.cLocalAmsNetId)
+	.WithAmsPort(_AppInfo.AdsPort)
+	.WithSymbolPath('PRG_UnitTests.fbRpcDynamicTests','NotExistingSymbol')
+	.Build();
+
+// Act
 stRetVal := fbSUT.VarInput(nDummy).NoReturnValue().Invoke();
 
 IF NOT stRetVal.bBusy THEN
@@ -678,263 +735,5 @@ stArg.nError := 456;
 VarOutput_ReturnValue := 123;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_RPC_Dynamic_Tests">
-      <LineId Id="167" Count="38" />
-      <LineId Id="246" Count="3" />
-      <LineId Id="245" Count="0" />
-      <LineId Id="268" Count="3" />
-      <LineId Id="267" Count="0" />
-      <LineId Id="273" Count="3" />
-      <LineId Id="272" Count="0" />
-      <LineId Id="206" Count="21" />
-      <LineId Id="66" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.NoParameter_NoReturnValue">
-      <LineId Id="7" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.NoParameter_ReturnValue">
-      <LineId Id="16" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.OneParameter_NoReturnValue">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.Register">
-      <LineId Id="7" Count="1" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="20" Count="2" />
-      <LineId Id="24" Count="1" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="14" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldInvokeMethod_NoArguments_NoReturnValue_Successfully">
-      <LineId Id="75" Count="1" />
-      <LineId Id="87" Count="0" />
-      <LineId Id="91" Count="0" />
-      <LineId Id="88" Count="2" />
-      <LineId Id="77" Count="0" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="63" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="64" Count="1" />
-      <LineId Id="51" Count="1" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldInvokeMethod_NoArguments_ReturnValueBoolean_Successfully">
-      <LineId Id="86" Count="2" />
-      <LineId Id="73" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="75" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="60" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldInvokeMethod_OneArgument_NoReturnValue_Successfully">
-      <LineId Id="86" Count="0" />
-      <LineId Id="101" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="88" Count="0" />
-      <LineId Id="87" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="89" Count="1" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldInvokeMethod_ThreeArguments_ReturnValue_Successfully">
-      <LineId Id="130" Count="0" />
-      <LineId Id="147" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="123" Count="2" />
-      <LineId Id="109" Count="0" />
-      <LineId Id="131" Count="0" />
-      <LineId Id="129" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="132" Count="1" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="126" Count="2" />
-      <LineId Id="108" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldInvokeMethod_TwoArguments_ReturnValue_Successfully">
-      <LineId Id="110" Count="0" />
-      <LineId Id="127" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="109" Count="0" />
-      <LineId Id="112" Count="0" />
-      <LineId Id="111" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="113" Count="1" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="108" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldInvokeMethod_TwoVarOutput_ReturnValue_Successfully">
-      <LineId Id="110" Count="0" />
-      <LineId Id="139" Count="0" />
-      <LineId Id="112" Count="0" />
-      <LineId Id="111" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="113" Count="1" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="162" Count="1" />
-      <LineId Id="127" Count="0" />
-      <LineId Id="187" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldInvokeMethod_VarInOutConstant_ReturnValue_Successfully">
-      <LineId Id="110" Count="0" />
-      <LineId Id="139" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="151" Count="0" />
-      <LineId Id="111" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="113" Count="1" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="127" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldInvokeMethod_VarInput_VarInOut_VarOutput_ReturnValue_Successfully">
-      <LineId Id="110" Count="0" />
-      <LineId Id="139" Count="0" />
-      <LineId Id="195" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="196" Count="1" />
-      <LineId Id="112" Count="0" />
-      <LineId Id="111" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="113" Count="1" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="199" Count="0" />
-      <LineId Id="202" Count="3" />
-      <LineId Id="200" Count="1" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldInvokeMethod_VarOutput_ReturnValue_Successfully">
-      <LineId Id="110" Count="0" />
-      <LineId Id="139" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="112" Count="0" />
-      <LineId Id="111" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="113" Count="1" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="162" Count="1" />
-      <LineId Id="127" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="15" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldReleaseAllSymbolHandleSuccessfully">
-      <LineId Id="55" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="59" Count="0" />
-      <LineId Id="63" Count="0" />
-      <LineId Id="62" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="18" Count="4" />
-      <LineId Id="24" Count="2" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="8" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldReturnError0x705">
-      <LineId Id="26" Count="0" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="7" Count="1" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="9" Count="2" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ShouldReturnError0x710">
-      <LineId Id="26" Count="0" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="7" Count="1" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="9" Count="1" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.ThreeParameters_ReturnValue">
-      <LineId Id="7" Count="0" />
-      <LineId Id="36" Count="2" />
-      <LineId Id="23" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.TwoParameters_ReturnValue">
-      <LineId Id="7" Count="0" />
-      <LineId Id="23" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.TwoVarOutput_ReturnValue">
-      <LineId Id="14" Count="3" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.VarInOutConstant_ReturnValue">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.VarInput_VarInOut_VarOutput_ReturnValue">
-      <LineId Id="36" Count="1" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="38" Count="5" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_RPC_Dynamic_Tests.VarOutput_ReturnValue">
-      <LineId Id="14" Count="3" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
