@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_Subscriber" Id="{1116b771-ad5a-4b79-a224-7c7462dfdfd0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL FB_Subscriber
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbRpcPublisherSubscribe 	: tchaxx.FB_RPC(sAmsNetId:= tchaxx.GCL.cLocalAmsNetId, nAmsPort:= 852, sInstancePath:= 'MAIN.fbPublisher', sSymbol:= 'Subscribe');
+	fbRpcPublisherUnsubscribe 	: tchaxx.FB_RPC(sAmsNetId:= tchaxx.GCL.cLocalAmsNetId, nAmsPort:= 852, sInstancePath:= 'MAIN.fbPublisher', sSymbol:= 'Unsubscribe');
+	sInstancePath			: STRING;
+	sSymbolCallback			: STRING := 'PublisherEventCallback';
+	nHandle					: UDINT;
+	nValuePublished			: UDINT;
+	bSubscribe				: BOOL := TRUE;
+	bUnsubscribe			: BOOL := FALSE;
+	bSubscribed				: BOOL := FALSE;
+	stAdsStatus				: tchaxx.ST_AdsStatus;
+END_VAR
+
+VAR_TEMP
+	sAmsNetId	: T_AmsNetID := tchaxx.GCL.cLocalAmsNetId;
+	hr		 	: HRESULT;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bSubscribed AND bSubscribe THEN
+	stAdsStatus := fbRpcPublisherSubscribe.VarInput(anyArg:= sAmsNetId)
+					.VarInput(anyArg:= _AppInfo.AdsPort)
+					.VarInput(anyArg:= sInstancePath)
+					.VarInput(anyArg:= sSymbolCallback)
+					.VarOutput(anyArg:= nHandle)
+					.ReturnValue(anyRetVal:= hr)
+					.Invoke();
+					
+	bSubscribed := NOT stAdsStatus.bBusy AND NOT stAdsStatus.bError;
+	IF bSubscribed THEN
+		bSubscribe := FALSE;
+	END_IF
+END_IF;
+				
+IF bSubscribed AND bUnsubscribe THEN
+	stAdsStatus := fbRpcPublisherUnsubscribe.VarInput(anyArg:= nHandle).ReturnValue(anyRetVal:= hr).Invoke();
+	IF NOT stAdsStatus.bBusy AND NOT stAdsStatus.bError THEN
+		bSubscribed := FALSE;
+		bUnsubscribe := FALSE;
+	END_IF
+END_IF				]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{9217d304-7e85-4833-9ad6-324fd41255cd}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	sInstancePath : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.sInstancePath := sInstancePath;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PublisherEventCallback" Id="{2090e9f8-b794-4d66-8c3a-ad59b9aad12a}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD PRIVATE PublisherEventCallback
+VAR_INPUT
+	nValue	: UDINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+nValuePublished := nValue;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -5,13 +5,13 @@
 VAR
 	{attribute 'analysis' := '-33'}
 	fbRpcServer : FB_RpcServer;
+	
+	fbPublisher	: FB_Publisher;		// PubSub example
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[
+fbPublisher();]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

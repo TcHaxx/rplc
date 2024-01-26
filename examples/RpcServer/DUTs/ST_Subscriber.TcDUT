@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_Subscriber" Id="{67a39308-d764-4927-baf0-a2373e465972}">
+    <Declaration><![CDATA[TYPE ST_Subscriber :
+STRUCT
+	nHandle			: UDINT;
+	stAdsStatus		: ST_AdsStatus;
+	fbRPC			: FB_RPC_Dynamic;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

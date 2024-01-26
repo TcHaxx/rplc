@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_Publisher" Id="{a0ab0a86-4795-48e5-b9fc-2b7992a5ed9e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL FB_Publisher
+
+VAR
+	aSubscribers	: ARRAY[0..cSubsUpperBound] OF ST_Subscriber;	
+END_VAR
+
+VAR_TEMP
+	nTrigger		: UDINT;
+END_VAR
+
+VAR CONSTANT
+	cSubsUpperBound	: UDINT := 9;
+	cTrigger		: UDINT := 50;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[nTrigger := _TaskInfo[GETCURTASKINDEXEX()].CycleCount MOD cTrigger;
+IF nTrigger = 0 THEN
+	InvokeSubscribersCallback(_TaskInfo[GETCURTASKINDEXEX()].CycleCount);
+END_IF
+
+InvokeSubscriberWhileBusy();]]></ST>
+    </Implementation>
+    <Method Name="InvokeSubscribersCallback" Id="{05d09ac9-3c5b-46d8-b345-3f54ead39896}">
+      <Declaration><![CDATA[METHOD PRIVATE InvokeSubscribersCallback
+VAR_INPUT
+	nTrigger : UDINT;
+END_VAR
+
+VAR
+	i 	: UDINT;
+	refSub : REFERENCE TO ST_Subscriber;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+FOR i:= 0 TO cSubsUpperBound DO
+	refSub REF= aSubscribers[i];
+	
+	IF refSub.nHandle = 0 THEN
+		CONTINUE;
+	END_IF
+	
+	refSub.stAdsStatus := refSub.fbRPC.VarInput(nTrigger).NoReturnValue().Invoke();
+
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InvokeSubscriberWhileBusy" Id="{22a41529-b4b9-4663-a7e6-db72e1f82b6f}">
+      <Declaration><![CDATA[METHOD PRIVATE InvokeSubscriberWhileBusy
+
+VAR
+	i 		: UDINT;
+	refSub : REFERENCE TO ST_Subscriber;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+FOR i:= 0 TO cSubsUpperBound DO
+	
+	refSub REF= aSubscribers[i];
+	IF refSub.nHandle = 0 OR_ELSE NOT refSub.stAdsStatus.bBusy THEN
+		CONTINUE;
+	END_IF
+	
+	refSub.stAdsStatus := refSub.fbRPC.Invoke();
+
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Subscribe" Id="{a8fc409b-6b0a-4ff0-8b5c-da98a89b36e9}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD PRIVATE Subscribe : HRESULT
+VAR_INPUT CONSTANT
+	sAmsNetId		: T_AmsNetID;
+	nPort			: T_AmsPort;
+	sInstancePath	: STRING;
+	sSymbol			: STRING;
+END_VAR
+VAR_OUTPUT
+	nHandle : UDINT;
+END_VAR
+
+VAR 
+	i	: UDINT;
+END_VAR
+
+VAR_INST
+	nHandleCnt			: UDINT;
+	fbCrititcalSection 	: FB_IecCriticalSection;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Subscribe := S_PENDING;
+
+(* start of critical section *)
+IF fbCrititcalSection.Enter() THEN
+    
+	FOR i := 0 TO cSubsUpperBound DO	
+		IF aSubscribers[i].nHandle > 0 THEN
+			CONTINUE;
+		END_IF
+		nHandleCnt := nHandleCnt + 1;
+		aSubscribers[i].nHandle := nHandleCnt;		
+		aSubscribers[i].fbRPC.Configure().WithAmsNetId(sAmsNetId).WithAmsPort(nPort).WithSymbolPath(sInstancePath, sSymbol).Build();
+		nHandle := nHandleCnt;
+		Subscribe := S_OK;
+		EXIT;
+	END_FOR
+	
+    (* end of critical section *)
+	fbCrititcalSection.Leave();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Unsubscribe" Id="{e6216574-9cfe-4875-8b10-56160164b521}">
+      <Declaration><![CDATA[{attribute 'TcRpcEnable'}
+METHOD PRIVATE Unsubscribe : HRESULT
+VAR_INPUT
+	nHandle	: UDINT;
+END_VAR
+
+VAR 
+	i		: UDINT;
+	refSub 	: REFERENCE TO ST_Subscriber;
+END_VAR
+
+VAR_INST
+	fbCrititcalSection 	: FB_IecCriticalSection;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Unsubscribe := S_FALSE;
+
+(* start of critical section *)
+IF fbCrititcalSection.Enter() THEN
+    
+	FOR i := 0 TO cSubsUpperBound DO
+		
+		refSub REF= aSubscribers[i];	
+		IF refSub.nHandle = 0 OR_ELSE refSub.nHandle <> nHandle THEN
+			CONTINUE;
+		END_IF
+		
+		refSub.nHandle := 0;	
+		Unsubscribe := S_OK;
+		EXIT;
+	END_FOR
+	
+    (* end of critical section *)
+	fbCrititcalSection.Leave();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

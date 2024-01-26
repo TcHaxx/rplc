@@ -11,6 +11,10 @@ VAR
 	stLibVersion : ST_LibVersion := Tc3_Module.Global_Version.stLibVersion_Tc3_Module;
 	sRetVal : T_MaxString;
 	stRetVal : ST_AdsStatus;
+	
+	// PubSub example
+	fbSubscriber1	:	FB_Subscriber(sInstancePath:= 'MAIN.fbSubscriber1');
+	fbSubscriber2	:	FB_Subscriber(sInstancePath:= 'MAIN.fbSubscriber2');
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -20,13 +24,9 @@ stRetVal := fbRpc.VarInput(sArg)
                  .VarInOut(stLibVersion)
                  .ReturnValue(sRetVal)
                  .Invoke();
-				 ]]></ST>
+				 
+fbSubscriber1();
+fbSubscriber2();]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="37" Count="0" />
-      <LineId Id="33" Count="3" />
-      <LineId Id="2" Count="0" />
-      <LineId Id="49" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
