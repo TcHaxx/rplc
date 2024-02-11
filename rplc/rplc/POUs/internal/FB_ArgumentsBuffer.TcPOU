@@ -22,7 +22,7 @@ VAR
 END_VAR
 
 VAR CONSTANT
-	cMaxArgsBuffer		: UINT := Param_Args.cMaxArgsBuffer;	// max sizeof aArgs buffer array.
+	cMaxArgsBuffer		: UDINT := Param_Args.cMaxArgsBuffer;	// max sizeof aArgs buffer array.
 	cMaxArgs			: USINT := Param_Args.cMaxArgs;			// max length method arguments
 END_VAR
 ]]></Declaration>
@@ -223,77 +223,5 @@ nAnyVarInOutIndex := nAnyVarInOutIndex + 1;
 nRetValSizeTotal := nRetValSizeTotal + TO_UDINT(stAny.nSize);]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_ArgumentsBuffer">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.GetRetVal">
-      <LineId Id="47" Count="1" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="41" Count="2" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="25" Count="1" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="50" Count="2" />
-      <LineId Id="49" Count="0" />
-      <LineId Id="60" Count="0" />
-      <LineId Id="65" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="61" Count="2" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="30" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.nArgsLength.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.nRetValLength.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.pArgsBuffer.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.pRetValBuffer.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.Reset">
-      <LineId Id="5" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="11" Count="1" />
-      <LineId Id="6" Count="1" />
-      <LineId Id="13" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.SetRetVal">
-      <LineId Id="8" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.SetVarInOut">
-      <LineId Id="29" Count="1" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="17" Count="6" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="12" Count="2" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="25" Count="3" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.SetVarInput">
-      <LineId Id="56" Count="13" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ArgumentsBuffer.SetVarOutput">
-      <LineId Id="76" Count="12" />
-      <LineId Id="94" Count="3" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

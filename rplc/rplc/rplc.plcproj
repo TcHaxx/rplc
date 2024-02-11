@@ -19,7 +19,7 @@
     <Company>TcHaxx</Company>
     <Released>false</Released>
     <Title>rplc</Title>
-    <ProjectVersion>0.3.1.0</ProjectVersion>
+    <ProjectVersion>0.3.2.0</ProjectVersion>
     <Author>densogiaichned</Author>
     <Description>Invoke RPC methods.</Description>
     <CompilerDefines />

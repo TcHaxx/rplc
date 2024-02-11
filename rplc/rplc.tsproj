@@ -81,10 +81,10 @@
 						<Name>LIB</Name>
 						<Name>UNIT_TEST</Name>
 						<Disable>0</Disable>
-						<Defines/>
+						<Defines></Defines>
 					</Variant>
 				</ProjectVariant>
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="rplc\rplc.tmc" TmcHash="{FFACAA29-CC31-1B43-7A1F-25FE96CBDC5D}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="rplc\rplc.tmc" TmcHash="{2A721EFF-5BE2-22C7-0BAC-4573684A02D1}">
 					<Name>rplc Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

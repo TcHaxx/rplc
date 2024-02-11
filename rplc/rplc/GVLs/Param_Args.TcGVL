@@ -4,8 +4,8 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'no-analysis'}
 VAR_GLOBAL CONSTANT
-	cMaxArgsBuffer		: UINT(64..16384) 	:= 1024;	// max sizeof aArgs buffer array in bytes.
-	cMaxArgs			: USINT(1..128) 	:= 32;		// max length method arguments
+	cMaxArgsBuffer		: UDINT(64..1048576) 	:= 65536;	// max sizeof aArgs buffer array in bytes.
+	cMaxArgs			: USINT(1..128) 		:= 32;		// max length method arguments
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
