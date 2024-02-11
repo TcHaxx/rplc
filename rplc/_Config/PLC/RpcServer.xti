@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" ClassName="CNestedPlcProjDef" TcProjectVariant="LIB">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.55" ClassName="CNestedPlcProjDef" TcProjectVariant="LIB">
 	<Project Disabled="true" GUID="{BEAD9CA9-0669-4F86-BC43-3CF685A3790D}" Name="RpcServer" PrjFilePath="..\..\..\examples\RpcServer\RpcServer.plcproj" TmcFilePath="..\..\..\examples\RpcServer\RpcServer.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
 		<ProjectVariant PvUseDisable="true" PvUseDefine="true">
 			<Variant>
@@ -14,7 +14,7 @@
 				<Defines/>
 			</Variant>
 		</ProjectVariant>
-		<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="..\examples\RpcServer\RpcServer.tmc" TmcHash="{16E7A0C0-5D5A-AA66-CC49-F35D45DAA9B9}">
+		<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="..\examples\RpcServer\RpcServer.tmc" TmcHash="{9FD63E01-1C4F-5363-7193-0998AADB19A8}">
 			<Name>RpcServer Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 			<Contexts>

@@ -16,14 +16,14 @@
     <Implicit_KindOfTask>{d15c772a-6df0-4fa2-88f6-44a4cd1f4b22}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{9a9bfd95-f3a6-4375-ace2-efa292448433}</Implicit_Jitter_Distribution>
     <LibraryReferences>{35e52655-13b0-4541-b001-366f0d0d94ba}</LibraryReferences>
-    <Company>tchaxx</Company>
+    <Company>TcHaxx</Company>
     <Released>false</Released>
     <Title>rplc</Title>
-    <ProjectVersion>0.3.0.0</ProjectVersion>
+    <ProjectVersion>0.3.1.0</ProjectVersion>
     <Author>densogiaichned</Author>
     <Description>Invoke RPC methods.</Description>
     <CompilerDefines />
-    <DefaultNamespace>TcHaxx</DefaultNamespace>
+    <DefaultNamespace>TcHaxx_rplc</DefaultNamespace>
     <LibraryCategories>
       <LibraryCategory xmlns="">
         <Id>{9c7e50a7-dead-beef-897b-4cdbc169222d}</Id>
